@@ -25,7 +25,13 @@
       <div class="title-bar__maximize"></div>
       <div class="title-bar__close"></div>
     </div>
-  </section>
+      
+    <!-- Botão de alternar tema -->
+    <button id="toggle-theme" class="theme-btn">🌙</button>
+    </div>
+</section>
+
+  
 
   <aside class="calendar__sidebar">
     <div class="sidebar__nav">
@@ -213,6 +219,37 @@
   </section>
 
 </main>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("toggle-theme");
+
+    if (!btn) {
+      console.warn("Botão #toggle-theme não encontrado.");
+      return;
+    }
+
+    // Carregar tema salvo (se houver)
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      btn.textContent = "☀️";
+    } else {
+      btn.textContent = "🌙";
+    }
+
+    // Alternar tema ao clicar
+    btn.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      if (document.body.classList.contains("dark-mode")) {
+        btn.textContent = "☀️"; // sol
+        localStorage.setItem("theme", "dark");
+      } else {
+        btn.textContent = "🌙"; // lua
+        localStorage.setItem("theme", "light");
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
