@@ -1,11 +1,25 @@
+/* Paleta padrão (modo claro) */
+:root {
+  --cor-black: #000000;
+  --cor-white: #ffffff;
+  --blue-white: #eeeeee;
+  --rosa: #000000fb; /* Variável 'rosa' */
+  --cinza: #000000; /* Variável 'cinza' */
+}
 
-:root 
-{--cor-black: #040605;
---cor-white: #f5f7f6;
---blue-white: #e1e7e8;
---pink: #ad7ae7fb;
---tangerine: #68bb8b;}
+/* Modo escuro */
+body.dark-mode {
+  --rosa: #000000; 
+  --cinza: #000000; /* Cor cinza para o modo escuro */
+  background-image: linear-gradient(45deg, var(--cinza) 0%, var(--rosa) 100%);
+  color: var(--cor-black);
+}
 
+/* Exemplo de uso */
+body {
+  background-color: var(--cor-white);
+  color: var(--cor-black);
+}
 
 * {
   outline: none;
@@ -16,19 +30,15 @@ html {
   font-size: 100%;
 }
 
-body {
-  height: 100%;
-  padding: 1rem;
-  background-color: #f6f5f1;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", sans-serif;
-  background-image: linear-gradient(45deg, var(--tangerine) 0%, var(--pink )100%);
-
-  @media screen and (min-width: 55em) {
-    height: 100vh;
-    margin: 0;
-  }
+body.dark-mode {
+  --cor-black: #ffffff;
+  --cor-white: #121212;
+  --blue-white: #000000;
+  --highlight: #dce0e4;
+  --accent: #e7f0eb;
+  
+  background-color: var(--cor-white);
+  color: var(--cor-black);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,7 +51,6 @@ p, span, ul, li {
   -webkit-font-smoothing: subpixel-antialiased;
   font-size: 1rem;
 }
-
 
 .calendar-contain {
   position: relative;
@@ -63,42 +72,41 @@ p, span, ul, li {
   }
 }
 
-
 .title-bar {
   position: relative;
   width: 100%;
   display: table;
   text-align: right;
- background:var(--cor-white);
+  background:var(--cor-white);
   padding: 0.5rem;
   margin-bottom: 0;
 
   &:after {
-  	display: table;
-  	clear: both;
+    display: table;
+    clear: both;
   }
 }
 
 .title-bar__burger {
-	display: block;
-	position: relative;
-	float: left;
-	overflow: hidden;
-	margin: 0;
-	padding: 0;
-	width: 38px;
-	height: 30px;
-	font-size: 0;
-	text-indent: -9999px;
-	appearance: none;
-	box-shadow: none;
-	border-radius: none;
-	border: none;
-	cursor: pointer;
-	background:none;
+  display: block;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 38px;
+  height: 30px;
+  font-size: 0;
+  text-indent: -9999px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  border: none;
+  cursor: pointer;
+  background:none;
 
   &:focus {
-  	outline: none;
+    outline: none;
   }
 }
 
@@ -134,52 +142,51 @@ p, span, ul, li {
 }
 
 .title-bar__year {
-	display: block;
-	position: relative;
-	float: left;
+  display: block;
+  position: relative;
+  float: left;
   font-size: 1rem;
-	line-height: 30px;
-	width: 43%;
-	padding: 0 0.5rem;
-	text-align: left;
+  line-height: 30px;
+  width: 43%;
+  padding: 0 0.5rem;
+  text-align: left;
 
-	@media screen and (min-width:55em) {
-		width: 27%;
-	}
+  @media screen and (min-width:55em) {
+    width: 27%;
+  }
 }
 
 .title-bar__month {
-	position: relative;
-	float: left;
+  position: relative;
+  float: left;
   font-size: 1rem;
-	line-height: 30px;
-	width: 22%;
-	padding: 0 0.5rem;
-	text-align: left;
-	
-	@media screen and (min-width:55em) {
-		width: 12%;
-	}
+  line-height: 30px;
+  width: 22%;
+  padding: 0 0.5rem;
+  text-align: left;
+  
+  @media screen and (min-width:55em) {
+    width: 12%;
+  }
 
-	&:after {
-		content: "";
-		display: inline;
-		position: absolute;
-		width: 10px;
-		height: 10px;
-		right: 0;
-		top: 5px;
-		margin: auto;
-		border-top: 1px solid rgb(0, 0, 0);
-		border-right: 1px solid rgb(0, 0, 0);
-		transform: rotate(135deg);
-	}
+  &:after {
+    content: "";
+    display: inline;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 0;
+    top: 5px;
+    margin: auto;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    transform: rotate(135deg);
+  }
 }
 
 .title-bar__minimize,
 .title-bar__maximize,
-.title-bar__close
-{
+.title-bar__close {
   position: relative;
   float: left;
   width: 34px;
@@ -187,40 +194,40 @@ p, span, ul, li {
 
   &:before,
   &:after {
-  	top: 30%;
-  	right: 30%;
-  	bottom: 30%;
-  	left: 30%;
-  	content: " ";
-  	position: absolute;
-  	border-color: #8e8e8e;
-  	border-style: solid;
-  	border-width: 0 0 2px 0;
+    top: 30%;
+    right: 30%;
+    bottom: 30%;
+    left: 30%;
+    content: " ";
+    position: absolute;
+    border-color: #8e8e8e;
+    border-style: solid;
+    border-width: 0 0 2px 0;
   }
 }
 
 .title-bar .title-bar__controls {
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	width: auto;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: auto;
 
-	&:before,
-	&:after {
-		content: none;
-	}
+  &:before,
+  &:after {
+    content: none;
+  }
 }
 
 .title-bar .title-bar__minimize {
-	&:before {
-	  border-bottom-width: 2px;
-	}
+  &:before {
+    border-bottom-width: 2px;
+  }
 }
 
 .title-bar .title-bar__maximize {
-	&:before {
-	  border-width: 1px 1px 2px 1px;
-	}
+  &:before {
+    border-width: 1px 1px 2px 1px;
+  }
 }
 
 .title-bar .title-bar__close:before,
@@ -238,7 +245,7 @@ p, span, ul, li {
 }
 
 .title-bar .title-bar__close:hover {
-   background-color: #E04343;
+  background-color: #747272;
 }
 
 .title-bar div:hover:after,
@@ -251,113 +258,110 @@ p, span, ul, li {
   border-color: #FFFFFF;
 }
 
-
-
 .calendar__sidebar {
-	width: 100%;
-	margin: 0 auto;
-	float: none;
-	background:linear-gradient(120deg, lighten(var(--blue-white), 5%), var(--blue-white));
-	padding-bottom: 0.7rem;
-	
-	@media screen and (min-width:55em) {
-		position: absolute;
-		height: 100%;
-		width: 30%;
-		float: left;
-		margin-bottom: 0;
-	}
+  width: 100%;
+  margin: 0 auto;
+  float: none;
+  background:linear-gradient(120deg, lighten(var(--blue-white), 5%), var(--blue-white));
+  padding-bottom: 0.7rem;
+  
+  @media screen and (min-width:55em) {
+    position: absolute;
+    height: 100%;
+    width: 30%;
+    float: left;
+    margin-bottom: 0;
+  }
 }
 
 .calendar__sidebar .content{
-	padding: 2rem 1.5rem 2rem 4rem;
-	color: var(--cor-black);
+  padding: 2rem 1.5rem 2rem 4rem;
+  color: var(--cor-black);
 }
 
 .sidebar__nav {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0.9rem;
   padding: 0.7rem 1rem;
-	background-color: var(--cor-white);
+  background-color: var(--cor-white);
 }
 
 .sidebar__nav-item {
-	display: inline-block;
-	width: 22px;
-	margin-right: 23px;
-	padding: 0;
-	opacity: 0.8;
+  display: inline-block;
+  width: 22px;
+  margin-right: 23px;
+  padding: 0;
+  opacity: 0.8;
 }
 
 .sidebar__list{
-	list-style: none;
-	margin: 0;
-	padding-left: 1rem;
-	padding-right: 1rem;
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .sidebar__list-item {
-	margin: 1.2rem 0;
-	color: lighten(var(--cor-black), 20%);
-	font-weight: 100;
-	font-size: 1rem;
+  margin: 1.2rem 0;
+  color: lighten(var(--cor-black), 20%);
+  font-weight: 100;
+  font-size: 1rem;
 }
 
 .list-item__time {
   display: inline-block;
-	width: 60px;
+  width: 60px;
 
-	@media screen and (min-width:55em) {
-		margin-right: 2rem;
-	}
+  @media screen and (min-width:55em) {
+    margin-right: 2rem;
+  }
 }
+
 .sidebar__list-item--complete {
-	color: transparentize(var(--cor-black), 0.7);
-		
-	.list-item__time {
-		color: transparentize(var(--cor-black), 0.7);
-	}
+  color: transparentize(var(--cor-black), 0.7);
+    
+  .list-item__time {
+    color: transparentize(var(--cor-black), 0.7);
+  }
 }
 
 .sidebar__heading {
-	font-size: 2.2rem;
-	font-weight: bold;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	margin-bottom: 3rem;
-	margin-top: 1rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
 
-	span {
-		float: right;
-		font-weight: 300;
-	}
+  span {
+    float: right;
+    font-weight: 300;
+  }
 }
 
 .calendar__heading-highlight {
-	color: #2d444a;
-	font-weight: 900;
+  color: #2d444a;
+  font-weight: 900;
 }
 
-
-
 .calendar__days {
-	display: flex;
-	flex-flow: column wrap;
-	align-items: stretch;
-	width: 100%;
-	float: none;
-	min-height: 580px;
-	height: 100%;
-	font-size: 12px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+  width: 100%;
+  float: none;
+  min-height: 580px;
+  height: 100%;
+  font-size: 12px;
   padding: 0.8rem 0 1rem 1rem;
-	background:var(--cor-white);
+  background:var(--cor-white);
 
-	@media screen and (min-width:55em) {
-		width: 70%;
-		float: right;
-	}
+  @media screen and (min-width:55em) {
+    width: 70%;
+    float: right;
+  }
 }
 
 .calendar__top-bar {
@@ -373,7 +377,6 @@ p, span, ul, li {
   -webkit-font-smoothing: subpixel-antialiased;
   font-size: 1rem;
 }
-
 
 .calendar__week {
   display: flex;
@@ -394,36 +397,36 @@ p, span, ul, li {
   font-weight: 600;
   line-height: 0.7;
 
-	@media screen and (min-width:55em) {
-		font-size: 2.3rem;
-	}
+  @media screen and (min-width:55em) {
+    font-size: 2.3rem;
+  }
 }
 
 .calendar__week {
-	.inactive {
-		.calendar__date,
-		.task-count {
-		  color: #c6c6c6;
-		}
-	}
+  .inactive {
+    .calendar__date,
+    .task-count {
+      color: #c6c6c6;
+    }
+  }
 
-	.today {
-		.calendar__date {
-		  color: var(--pink);
-		}
-	}
+  .today {
+    .calendar__date {
+      color: var(--rosa);
+    }
+  }
 }
 
 .calendar__task {
-	color: var(--cor-black);
-	display: flex;
-	font-size: 0.8rem;
+  color: var(--cor-black);
+  display: flex;
+  font-size: 0.8rem;
 
-	@media screen and (min-width:55em) {
-		font-size: 1rem;
-	}
+  @media screen and (min-width:55em) {
+    font-size: 1rem;
+  }
 
-	&.calendar__task--today {
-		color: var(--pink);
-	}
+  &.calendar__task--today {
+    color: var(--rosa);
+  }
 }
