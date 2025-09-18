@@ -1,4 +1,4 @@
-import { chunk } from './utils.js';
+import { chunk, createElement } from './utils.js';
 
 /**
  * Gera um array representando os dias de um calendário mensal.
@@ -42,19 +42,17 @@ export function generateCalander(){
  * 
  * Utiliza os dados de tarefas do arquivo 'tasks.json'.
  */
-export async function renderCalendar(){
+export async function renderCalendar(tasks){
 
   let calendar = generateCalander();
 
   const weeks = chunk(calendar);
 
-  const calendarDays = document.querySelector('.calendar__days');
+  const mainContainer = document.querySelector('.main__container');
 
-  let request = await fetch('tasks.json');
-  let tasks = await request.json();
+  mainContainer.innerHTML = "";
 
-  // Remove só os elementos de semana, não a top-bar
-  calendarDays.querySelectorAll('.calendar__week').forEach(week => week.remove());
+  renderCalendarTopBar();
 
   weeks.forEach(week => {
     let weekRow = document.createElement('div');
@@ -67,8 +65,27 @@ export async function renderCalendar(){
       dayCell.innerHTML = `<span class="calendar__date">${day.date.getDate()}</span><span class="calendar__task">${tasks[day.date.toLocaleDateString('en-CA')]?.length || 0}</span>`;
       weekRow.appendChild(dayCell);
     });
-    document.querySelector('.calendar__days').appendChild(weekRow);
+    document.querySelector('.main__container').appendChild(weekRow);
   });
 
   console.log("Calendário renderizado com sucesso.");
+}
+
+
+/**
+ * Renderiza a barra superior do calendário mostrando os dias da semana.
+ */
+function renderCalendarTopBar() {
+  let weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
+
+  let mainContainer = document.querySelector('.main__container');
+
+  let topBar = createElement('section', 'calendar__top-bar');
+
+  weekDays.forEach(day => {
+    let dayElement = createElement('span', 'top-bar__days', day);
+    topBar.appendChild(dayElement);
+  });
+
+  mainContainer.appendChild(topBar);
 }

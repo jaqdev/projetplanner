@@ -10,6 +10,7 @@ body { font-family:"Quicksand", sans-serif;
   --white: #eeeeee;
   --cor-preto: #000000fb; 
   --cinza: #000000;
+  --background-menu: #f5f5f5;
 }
 
 /* Modo escuro */
@@ -261,7 +262,7 @@ p, span, ul, li {
   border-color: #FFFFFF;
 }
 
-.calendar__sidebar {
+.menu__sidebar {
   width: 100%;
   margin: 0 auto;
   float: none;
@@ -277,71 +278,58 @@ p, span, ul, li {
   }
 }
 
-.calendar__sidebar .content{
-  padding: 2rem 1.5rem 2rem 4rem;
-  color: var(--cor-black);
-}
-
-.sidebar__nav {
+.menu__nav {
   display: flex;
-  align-items: center;
+  align-items: start;
+  height: 100%;
   justify-content: flex-start;
   margin-bottom: 0.9rem;
   padding: 0.7rem 1rem;
   background-color: var(--cor-white);
 }
 
-.sidebar__nav-item {
-  display: inline-block;
-  width: 22px;
-  margin-right: 23px;
-  padding: 0;
-  opacity: 0.8;
-}
-
 .sidebar__list{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   list-style: none;
   margin: 0;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.sidebar__list-item {
-  margin: 1.2rem 0;
-  color: lighten(var(--cor-black), 20%);
-  font-weight: 100;
-  font-size: 1rem;
+.menu__list-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-right: 23px;
+  padding: 0 10px;
+  opacity: 0.8;
 }
 
-.list-item__time {
-  display: inline-block;
-  width: 60px;
-
-  @media screen and (min-width:55em) {
-    margin-right: 2rem;
-  }
+.menu__list-item:hover {
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-.sidebar__list-item--complete {
-  color: transparentize(var(--cor-black), 0.7);
-    
-  .list-item__time {
-    color: transparentize(var(--cor-black), 0.7);
-  }
+.menu__list-item button {
+  border: none;
+  background: transparent;
+  font-size: medium;
+  color: var(--cor-black)
 }
 
-.sidebar__heading {
-  font-size: 2.2rem;
-  font-weight: bold;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin-bottom: 3rem;
-  margin-top: 1rem;
+.menu__list-item button:hover {
+  cursor: pointer;
+}
 
-  span {
-    float: right;
-    font-weight: 300;
-  }
+.menu__list-item img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 .calendar__heading-highlight {
@@ -349,7 +337,7 @@ p, span, ul, li {
   font-weight: 900;
 }
 
-.calendar__days {
+.main__container {
   display: flex;
   flex-flow: column wrap;
   align-items: stretch;
@@ -479,3 +467,4 @@ p, span, ul, li {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     color: var(--cor-black);
 }
+
