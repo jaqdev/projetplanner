@@ -1,3 +1,5 @@
+import { chunk } from './utils.js';
+
 /**
  * Gera um array representando os dias de um calendário mensal.
  * Cada elemento contém a data e se pertence ao mês atual.
@@ -5,7 +7,7 @@
  *
  * @returns {Array} Array de objetos com { date: Date, currentMonth: boolean }
  */
-function generateCalander(){
+export function generateCalander(){
     const CURRENT_DATE = new Date();
     const CURRENT_MONTH = CURRENT_DATE.getMonth();
     const CURRENT_YEAR = CURRENT_DATE.getFullYear();
@@ -34,29 +36,13 @@ function generateCalander(){
 }
 
 /**
- * Divide um array em subarrays de tamanho 7.
- * Útil para separar os dias do calendário em semanas.
- *
- * @param {Array} arr - Array a ser dividido.
- * @returns {Array[]} Array de subarrays com até 7 elementos cada.
- */
-function chunk(arr) {
-    const size = 7;
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += size) {
-        chunks.push(arr.slice(i, i + size));
-    }
-    return chunks;
-}
-
-/**
  * Renderiza o calendário na tela.
  * Busca os dias do mês, divide em semanas e exibe cada dia com a quantidade de tarefas.
  * Remove semanas antigas antes de adicionar as novas.
  * 
  * Utiliza os dados de tarefas do arquivo 'tasks.json'.
  */
-async function renderCalendar(){
+export async function renderCalendar(){
 
   let calendar = generateCalander();
 
@@ -83,6 +69,6 @@ async function renderCalendar(){
     });
     document.querySelector('.calendar__days').appendChild(weekRow);
   });
-}
 
-renderCalendar();
+  console.log("Calendário renderizado com sucesso.");
+}
