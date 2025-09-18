@@ -37,229 +37,27 @@
     </div>
 </section>
 
-  
-
-  <aside class="calendar__sidebar">
-
-<div class="kanban-board">
-    <div class="kanban-column">
-        <div class="kanban-column-title">A Fazer</div>
-        <div class="kanban-card">Tarefa 1</div>
-        <div class="kanban-card">Tarefa 2</div>
-    </div>
-    <div class="kanban-column">
-        <div class="kanban-column-title">Em Progresso</div>
-        <div class="kanban-card">Tarefa em andamento</div>
-    </div>
-    <div class="kanban-column">
-        <div class="kanban-column-title">Concluído</div>
-        <div class="kanban-card">Tarefa concluída</div>
-    </div>
-</div>
-
-    
+  <aside class="menu__sidebar">
+    <nav class="menu__nav">
+      <ul class="sidebar__list">
+        <li class="menu__list-item">
+          <img src="./assets/icons/calendar-dark.png" alt="Icone de calendário" id="calendar-icon">
+          <button class="menu__button" data-option="calendar">Calendario</button></li>
+        <li class="menu__list-item">
+          <img src="./assets/icons/kanban-dark.png" alt="Icone de kanban" id="kanban-icon">
+          <button class="menu__button" data-option="kanban">Kanban</button></li>
+      </ul>
+    </nav>
   </aside>
 
   
-  <section class="calendar__days">
-    <section class="calendar__top-bar">
-      <span class="top-bar__days">Seg</span>
-      <span class="top-bar__days">Ter</span>
-      <span class="top-bar__days">Qua</span>
-      <span class="top-bar__days">Qui</span>
-      <span class="top-bar__days">Sex</span>
-      <span class="top-bar__days">Sab</span>
-      <span class="top-bar__days">Dom</span>
-    </section>
-
-    <section class="calendar__week">
-      <div class="calendar__day inactive">
-        <span class="calendar__date">30</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day inactive">
-        <span class="calendar__date">31</span>
-        <span class="calendar__task">4</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">1</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">2</span>
-        <span class="calendar__task">3</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">3</span>
-        <span class="calendar__task">1</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">4</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">5</span>
-        <span class="calendar__task">4</span>
-      </div>
-    </section>
-
-    <section class="calendar__week">
-      <div class="calendar__day">
-        <span class="calendar__date">6</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">7</span>
-        <span class="calendar__task">3</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">8</span>
-        <span class="calendar__task">3</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">9</span>
-        <span class="calendar__task">1</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">10</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">11</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">12</span>
-        <span class="calendar__task">1</span>
-      </div>
-    </section>
-
-    <section class="calendar__week">
-      <div class="calendar__day">
-        <span class="calendar__date">13</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">14</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day today">
-        <span class="calendar__date">15</span>
-        <span class="calendar__task calendar__task--today"></span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">16</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">17</span>
-        <span class="calendar__task">1</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">18</span>
-        <span class="calendar__task">4</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">19</span>
-        <span class="calendar__task">2</span>
-      </div>
-    </section>
-
-    <section class="calendar__week">
-      <div class="calendar__day">
-        <span class="calendar__date">20</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">21</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">22</span>
-        <span class="calendar__task">1</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">23</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">24</span>
-        <span class="calendar__task">5</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">25</span>
-        <span class="calendar__task">3</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">26</span>
-        <span class="calendar__task">1</span>
-      </div>
-    </section>
-
-    <section class="calendar__week">
-      <div class="calendar__day">
-        <span class="calendar__date">27</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day">
-        <span class="calendar__date">28</span>
-        <span class="calendar__task">1</span>
-      </div>
-      <div class="calendar__day inactive">
-        <span class="calendar__date">1</span>
-        <span class="calendar__task">2</span>
-      </div>
-      <div class="calendar__day inactive">
-        <span class="calendar__date">2</span>
-        <span class="calendar__task">1</span>
-      </div>
-      <div class="calendar__day inactive">
-        <span class="calendar__date">3</span>
-        <span class="calendar__task">5</span>
-      </div>
-      <div class="calendar__day inactive">
-        <span class="calendar__date">4</span>
-        <span class="calendar__task">3</span>
-      </div>
-      <div class="calendar__day inactive">
-        <span class="calendar__date">5</span>
-        <span class="calendar__task">1</span>
-      </div>
-    </section>
+  <section class="main__container">
+ 
   </section>
 
 </main>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const btn = document.getElementById("toggle-theme");
 
-    if (!btn) {
-      console.warn("Botão #toggle-theme não encontrado.");
-      return;
-    }
-
-    // Carregar tema salvo (se houver)
-    if (localStorage.getItem("theme") === "dark") {
-      document.body.classList.add("dark-mode");
-      btn.textContent = "☀️";
-    } else {
-      btn.textContent = "🌙";
-    }
-
-    // Alternar tema ao clicar
-    btn.addEventListener("click", function () {
-      document.body.classList.toggle("dark-mode");
-
-      if (document.body.classList.contains("dark-mode")) {
-        btn.textContent = "☀️"; // sol
-        localStorage.setItem("theme", "dark");
-      } else {
-        btn.textContent = "🌙"; // lua
-        localStorage.setItem("theme", "light");
-      }
-    });
-  });
-</script>
+<script type="module" src="./scripts/main.js"></script>
 
 </body>
 </html>

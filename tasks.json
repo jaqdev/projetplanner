@@ -1,0 +1,82 @@
+{
+  "2025-09-01": [],
+  "2025-09-02": [
+    { "id": 1, "title": "Revisar requisitos", "description": "Analisar requisitos do projeto.", "status": "completed" }
+  ],
+  "2025-09-03": [
+    { "id": 2, "title": "Configurar ambiente", "description": "Preparar ambiente de desenvolvimento.", "status": "completed" },
+    { "id": 3, "title": "Criar repositório", "description": "Iniciar repositório no GitHub.", "status": "completed" }
+  ],
+  "2025-09-04": [],
+  "2025-09-05": [
+    { "id": 4, "title": "Planejar sprint", "description": "Definir tarefas da sprint.", "status": "progress" }
+  ],
+  "2025-09-06": [],
+  "2025-09-07": [
+    { "id": 5, "title": "Documentar API", "description": "Escrever documentação da API.", "status": "progress" }
+  ],
+  "2025-09-08": [
+    { "id": 6, "title": "Implementar autenticação", "description": "Adicionar login de usuários.", "status": "todo" },
+    { "id": 7, "title": "Testar login", "description": "Executar testes no módulo de login.", "status": "todo" }
+  ],
+  "2025-09-09": [],
+  "2025-09-10": [
+    { "id": 8, "title": "Corrigir bugs", "description": "Resolver bugs encontrados nos testes.", "status": "progress" }
+  ],
+  "2025-09-11": [],
+  "2025-09-12": [
+    { "id": 9, "title": "Reunião de acompanhamento", "description": "Verificar progresso da equipe.", "status": "completed" }
+  ],
+  "2025-09-13": [
+    { "id": 10, "title": "Desenvolver dashboard", "description": "Criar painel de controle.", "status": "progress" },
+    { "id": 11, "title": "Testar dashboard", "description": "Validar funcionalidades do painel.", "status": "todo" }
+  ],
+  "2025-09-14": [],
+  "2025-09-15": [
+    { "id": 12, "title": "Planejar deploy", "description": "Definir estratégia de publicação.", "status": "todo" }
+  ],
+  "2025-09-16": [],
+  "2025-09-17": [
+    { "id": 13, "title": "Deploy inicial", "description": "Publicar primeira versão do sistema.", "status": "completed" }
+  ],
+  "2025-09-18": [],
+  "2025-09-19": [
+    { "id": 14, "title": "Reunião de feedback", "description": "Coletar opiniões dos usuários.", "status": "progress" }
+  ],
+  "2025-09-20": [
+    { "id": 15, "title": "Ajustar funcionalidades", "description": "Melhorar recursos conforme feedback.", "status": "todo" },
+    { "id": 16, "title": "Documentar alterações", "description": "Atualizar documentação do sistema.", "status": "progress" }
+  ],
+  "2025-09-21": [],
+  "2025-09-22": [
+    { "id": 17, "title": "Planejar próxima sprint", "description": "Organizar tarefas futuras.", "status": "todo" }
+  ],
+  "2025-09-23": [],
+  "2025-09-24": [
+    { "id": 18, "title": "Testar integração", "description": "Executar testes de integração.", "status": "progress" }
+  ],
+  "2025-09-25": [],
+  "2025-09-26": [
+    { "id": 19, "title": "Reunião de alinhamento", "description": "Sincronizar equipe sobre progresso.", "status": "completed" }
+  ],
+  "2025-09-27": [],
+  "2025-09-28": [
+    { "id": 20, "title": "Testar relatórios", "description": "Validar geração de relatórios.", "status": "todo" },
+    { "id": 21, "title": "Desenvolver relatórios", "description": "Criar relatórios automáticos.", "status": "progress" }
+  ],
+  "2025-09-29": [],
+  "2025-09-30": [
+    { "id": 22, "title": "Implementar melhorias", "description": "Adicionar melhorias planejadas.", "status": "todo" }
+  ],
+  "2025-10-01": [],
+  "2025-10-02": [
+    { "id": 23, "title": "Treinamento da equipe", "description": "Ministrar treinamento sobre novas funcionalidades.", "status": "todo" }
+  ],
+  "2025-10-03": [],
+  "2025-10-04": [
+    { "id": 24, "title": "Revisar contratos", "description": "Analisar contratos com fornecedores.", "status": "progress" }
+  ],
+  "2025-10-05": [
+    { "id": 25, "title": "Atualizar roadmap", "description": "Revisar e atualizar o roadmap do projeto.", "status": "todo" }
+  ]
+}
