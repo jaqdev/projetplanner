@@ -1,5 +1,7 @@
 import { chunk, createElement } from './utils.js';
 
+export const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
 /**
  * Gera um array representando os dias de um calendário mensal.
  * Cada elemento contém a data e se pertence ao mês atual.
@@ -94,4 +96,38 @@ function renderCalendarTopBar() {
   });
 
   mainContainer.appendChild(topBar);
+}
+
+/**
+ * Configura a seleção de ano na barra superior do calendário.
+ * 
+ * @param {function(number): void} onYearChange - Função de callback que é chamada
+ *        quando o usuário clica para mudar o ano. Recebe o novo ano como parâmetro.
+ *
+ */
+export function selectYear(onYearChange) {
+  const prevYearButton = document.querySelector('.title_bar__prev-year');
+  const nextYearButton = document.querySelector('.title_bar__next-year');
+
+  prevYearButton.addEventListener('click', () => onYearChange(parseInt(document.getElementById('title_bar__selected-year').textContent) - 1));
+  nextYearButton.addEventListener('click', () => onYearChange(parseInt(document.getElementById('title_bar__selected-year').textContent) + 1));
+}
+
+/**
+ * Configura a seleção de mês na barra superior do calendário.
+ * 
+ * @param {function(number): void} onMonthChange - Função de callback chamada
+ *        quando o usuário clica em um mês. Recebe o índice do mês (0-11) como parâmetro.
+ *
+ */
+export function selectMonth(onMonthChange) {
+    let monthsButtosns = document.querySelectorAll('.title-bar__month-option');
+
+    monthsButtosns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+      let selectedMonth = parseInt(e.currentTarget.dataset.month);
+        if (onMonthChange) onMonthChange(selectedMonth); // chama callback
+      });
+
+    });
 }
