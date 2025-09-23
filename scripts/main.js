@@ -2,8 +2,15 @@ import {renderCalendar} from './calendar.js'
 import {renderKanban} from './kanban.js'
 import './theme.js'
 
-let response = await fetch("../tasks.json");
-let tasks = await response.json();
+let tasks = {};
+
+fetch('./tasks.json')
+  .then(response => response.json())
+  .then(data => {
+    tasks = data;
+    renderCalendar(tasks);
+  })
+  .catch(error => console.error('Error loading tasks:', error));
 
 renderCalendar(tasks);
 
