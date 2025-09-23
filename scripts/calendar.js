@@ -7,29 +7,29 @@ import { chunk, createElement } from './utils.js';
  *
  * @returns {Array} Array de objetos com { date: Date, currentMonth: boolean }
  */
-export function generateCalander(){
-    const CURRENT_DATE = new Date();
-    const CURRENT_MONTH = CURRENT_DATE.getMonth();
-    const CURRENT_YEAR = CURRENT_DATE.getFullYear();
+export function generateCalander(year, month) {
+    const DATE_TO_RENDER = new Date(year, month);
+    const MONTH_TO_RENDER = DATE_TO_RENDER.getMonth();
+    const YEAR_TO_RENDER = DATE_TO_RENDER.getFullYear();
 
-    let firstDateOfCorrentMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 1);
-    let lastDateOfCurrentMonth = new Date(CURRENT_YEAR, CURRENT_MONTH + 1, 0);
-    let lastDateOfPreviousMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 0);
+    let firstDateOfSelectedMonth = new Date(YEAR_TO_RENDER, MONTH_TO_RENDER, 1);
+    let lastDateOfSelectedMonth = new Date(YEAR_TO_RENDER, MONTH_TO_RENDER + 1, 0);
+    let lastDateOfPreviousSelectedMonth = new Date(YEAR_TO_RENDER, MONTH_TO_RENDER, 0);
 
-    let daysToFillBefore = firstDateOfCorrentMonth.getDay() -1 <0 ? 6 : firstDateOfCorrentMonth.getDay() -1;
-    let daysToFillAfter = Math.abs(lastDateOfCurrentMonth.getDay() - 7);
+    let daysToFillBefore = firstDateOfSelectedMonth.getDay() -1 <0 ? 6 : firstDateOfSelectedMonth.getDay() -1;
+    let daysToFillAfter = Math.abs(lastDateOfSelectedMonth.getDay() - 7);
     let calendar = [];
 
     for (let i = daysToFillBefore; i > 0; i--) {
-        calendar.push({date: new Date(CURRENT_YEAR, CURRENT_MONTH - 1, lastDateOfPreviousMonth.getDate() - i + 1), currentMonth: false});
+        calendar.push({date: new Date(YEAR_TO_RENDER, MONTH_TO_RENDER - 1, lastDateOfPreviousSelectedMonth.getDate() - i + 1), currentMonth: false});
     }
 
-    for (let i = 1; i <= lastDateOfCurrentMonth.getDate(); i++) {
-        calendar.push({date: new Date(CURRENT_YEAR, CURRENT_MONTH, i), currentMonth: true});
+    for (let i = 1; i <= lastDateOfSelectedMonth.getDate(); i++) {
+        calendar.push({date: new Date(YEAR_TO_RENDER, MONTH_TO_RENDER, i), currentMonth: true});
     }
     
     for (let i = 1; i <= daysToFillAfter; i++) {
-        calendar.push({date: new Date(CURRENT_YEAR, CURRENT_MONTH + 1, i), currentMonth: false});
+        calendar.push({date: new Date(YEAR_TO_RENDER, MONTH_TO_RENDER + 1, i), currentMonth: false});
     }
     
     return calendar;
@@ -42,9 +42,15 @@ export function generateCalander(){
  * 
  * Utiliza os dados de tarefas do arquivo 'tasks.json'.
  */
-export async function renderCalendar(tasks){
+export async function renderCalendar(tasks, year = new Date().getFullYear(), month = new Date().getMonth()) {
 
-  let calendar = generateCalander();
+  let calendar = generateCalander(year, month);
+
+  // Datas do calendário para manda a api
+  let firstDate = calendar[0].date;
+  let lastDate = calendar[calendar.length - 1].date;
+
+  console.log("Renderizando calendário para:", firstDate.toLocaleDateString('en-CA'), "até", lastDate.toLocaleDateString('en-CA'));
 
   const weeks = chunk(calendar);
 
