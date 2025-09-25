@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+     <link rel="stylesheet" href="./styles/login.css">
+
+</head>
+
+<body>
+        <div class="login-container">
+        <h2>Entrar</h2>
+        <form action="#" method="POST">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" minlength="4" required>
+                    <img id="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
+                </input>
+            </div>
+
+            <div class="form-options">
+                <div class="remember-me-container">
+                    <input type="checkbox" name="rememberMe" id="remember-me">
+                    <label for="remember-me">Lembrar de mim</label>
+                </div>
+
+                <a id="forgot-password" href="./esqueci-a-senha.html">Esqueci a senha</a>
+            </div>
+
+
+            <button type="submit" class="login-btn">Entrar</button>
+        </form>
+    </div>
+
+    <script type="module" src="./scripts/login/main.js"></script>
+    
+</body>
+</html>

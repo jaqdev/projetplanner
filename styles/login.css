@@ -24,6 +24,7 @@ h2 {
 
 .input-group {
     margin-bottom: 15px;
+    position: relative;
 }
 
 .input-group label {
@@ -36,10 +37,57 @@ h2 {
 .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 2px solid #8d8c8c;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
+    outline: none;
+
+    &:focus {
+         border: 2px solid #5f5d5d;
+         transition: all .3s ease;
+    }
+   
+}
+
+.input-group #visibility-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.form-options.remember-me-container {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+}
+
+.form-options .remember-me-container input {
+    width: 15px;
+    height: 15px;
+}
+
+.form-options #forgot-password {
+    display: inline;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .login-btn {

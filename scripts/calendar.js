@@ -2,6 +2,7 @@ import { chunk, createElement } from './utils.js';
 
 export const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
+
 /**
  * Gera um array representando os dias de um calendário mensal.
  * Cada elemento contém a data e se pertence ao mês atual.
@@ -10,28 +11,28 @@ export const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', '
  * @returns {Array} Array de objetos com { date: Date, currentMonth: boolean }
  */
 export function generateCalander(year, month) {
-    const DATE_TO_RENDER = new Date(year, month);
-    const MONTH_TO_RENDER = DATE_TO_RENDER.getMonth();
-    const YEAR_TO_RENDER = DATE_TO_RENDER.getFullYear();
+    const CURRENT_DATE = new Date(year, month);
+    const CURRENT_MONTH = CURRENT_DATE.getMonth();
+    const CURRENT_YEAR = CURRENT_DATE.getFullYear();
 
-    let firstDateOfSelectedMonth = new Date(YEAR_TO_RENDER, MONTH_TO_RENDER, 1);
-    let lastDateOfSelectedMonth = new Date(YEAR_TO_RENDER, MONTH_TO_RENDER + 1, 0);
-    let lastDateOfPreviousSelectedMonth = new Date(YEAR_TO_RENDER, MONTH_TO_RENDER, 0);
+    let firstDateOfCorrentMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 1);
+    let lastDateOfCurrentMonth = new Date(CURRENT_YEAR, CURRENT_MONTH + 1, 0);
+    let lastDateOfPreviousMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 0);
 
-    let daysToFillBefore = firstDateOfSelectedMonth.getDay() -1 <0 ? 6 : firstDateOfSelectedMonth.getDay() -1;
-    let daysToFillAfter = Math.abs(lastDateOfSelectedMonth.getDay() - 7);
+    let daysToFillBefore = firstDateOfCorrentMonth.getDay() -1 <0 ? 6 : firstDateOfCorrentMonth.getDay() -1;
+    let daysToFillAfter = Math.abs(lastDateOfCurrentMonth.getDay() - 7);
     let calendar = [];
 
     for (let i = daysToFillBefore; i > 0; i--) {
-        calendar.push({date: new Date(YEAR_TO_RENDER, MONTH_TO_RENDER - 1, lastDateOfPreviousSelectedMonth.getDate() - i + 1), currentMonth: false});
+        calendar.push({date: new Date(CURRENT_YEAR, CURRENT_MONTH - 1, lastDateOfPreviousMonth.getDate() - i + 1), currentMonth: false});
     }
 
-    for (let i = 1; i <= lastDateOfSelectedMonth.getDate(); i++) {
-        calendar.push({date: new Date(YEAR_TO_RENDER, MONTH_TO_RENDER, i), currentMonth: true});
+    for (let i = 1; i <= lastDateOfCurrentMonth.getDate(); i++) {
+        calendar.push({date: new Date(CURRENT_YEAR, CURRENT_MONTH, i), currentMonth: true});
     }
     
     for (let i = 1; i <= daysToFillAfter; i++) {
-        calendar.push({date: new Date(YEAR_TO_RENDER, MONTH_TO_RENDER + 1, i), currentMonth: false});
+        calendar.push({date: new Date(CURRENT_YEAR, CURRENT_MONTH + 1, i), currentMonth: false});
     }
     
     return calendar;
@@ -96,38 +97,4 @@ function renderCalendarTopBar() {
   });
 
   mainContainer.appendChild(topBar);
-}
-
-/**
- * Configura a seleção de ano na barra superior do calendário.
- * 
- * @param {function(number): void} onYearChange - Função de callback que é chamada
- *        quando o usuário clica para mudar o ano. Recebe o novo ano como parâmetro.
- *
- */
-export function selectYear(onYearChange) {
-  const prevYearButton = document.querySelector('.title_bar__prev-year');
-  const nextYearButton = document.querySelector('.title_bar__next-year');
-
-  prevYearButton.addEventListener('click', () => onYearChange(parseInt(document.getElementById('title_bar__selected-year').textContent) - 1));
-  nextYearButton.addEventListener('click', () => onYearChange(parseInt(document.getElementById('title_bar__selected-year').textContent) + 1));
-}
-
-/**
- * Configura a seleção de mês na barra superior do calendário.
- * 
- * @param {function(number): void} onMonthChange - Função de callback chamada
- *        quando o usuário clica em um mês. Recebe o índice do mês (0-11) como parâmetro.
- *
- */
-export function selectMonth(onMonthChange) {
-    let monthsButtosns = document.querySelectorAll('.title-bar__month-option');
-
-    monthsButtosns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-      let selectedMonth = parseInt(e.currentTarget.dataset.month);
-        if (onMonthChange) onMonthChange(selectedMonth); // chama callback
-      });
-
-    });
 }
