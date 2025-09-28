@@ -20,7 +20,7 @@ export function generateCalander(year, month) {
     let lastDateOfPreviousMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 0);
 
     let daysToFillBefore = firstDateOfCorrentMonth.getDay() -1 <0 ? 6 : firstDateOfCorrentMonth.getDay() -1;
-    let daysToFillAfter = Math.abs(new Date(2025, 10, 30).getDay() - 7) < 6 ? Math.abs(new Date(2025, 10, 30).getDay() - 7) : 0;
+    let daysToFillAfter = Math.abs(lastDateOfCurrentMonth.getDay() - 7) < 6 ? Math.abs(lastDateOfCurrentMonth.getDay() - 7) : 0;
 
     let calendar = [];
 
