@@ -473,19 +473,23 @@ p, span, ul, li {
 }
 
 .calendar__top-bar {
-  width: 95%;
-  display: flex;
-  flex: 32px 0 0;
+  width: 95.1%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid var(--border);
+  border-bottom: none;
 }
 
 .top-bar__days {
   width: 100%;
   text-align: center;
-  padding: 0 5px;
   color: lighten(var(--highlight), 20%);
   font-weight: 100;
   -webkit-font-smoothing: subpixel-antialiased;
   font-size: 1rem;
+  line-height: 25px;
+  border-right: 1px solid var(--border);
+  border-bottom: none;
 }
 
 .calendar__week {
