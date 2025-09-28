@@ -1,4 +1,4 @@
-import {createElement} from './utils.js'
+import {createElement, formatTasksToKanban} from './utils.js'
 
 /**
  * Renderiza um quadro Kanban com base nas tarefas fornecidas.
@@ -33,21 +33,27 @@ export function renderKanban(tasks) {
     inProgressColumn.appendChild(inProgressTitle);
     completedColumn.appendChild(completedTitle);
 
-    // Converte o objeto de tarefas em um array simples
-    const tasksArray = Object.values(tasks).flat();
+    // Formata as tarefas para o layout Kanban
+    tasks = formatTasksToKanban(tasks);
 
-    // Cria os cartões de tarefa e adiciona à coluna correta
-    tasksArray.forEach(task => {
+    let todoTasks = tasks['todo'] || [];
+    let inProgressTasks = tasks['progress'] || [];
+    let completedTasks = tasks['completed'] || [];
+
+    todoTasks.forEach(task => {
         const taskCard = createElement('div', 'kanban-card', task.title);
-
-        if (task.status === 'todo') {
-            todoColumn.appendChild(taskCard);
-        } else if (task.status === 'progress') {
-            inProgressColumn.appendChild(taskCard);
-        } else if (task.status === 'completed') {
-            completedColumn.appendChild(taskCard);
-        }
+        todoColumn.appendChild(taskCard);
     });
+
+    inProgressTasks.forEach(task => {
+        const taskCard = createElement('div', 'kanban-card', task.title);
+        inProgressColumn.appendChild(taskCard);
+    });
+    
+    completedTasks.forEach(task => {
+        const taskCard = createElement('div', 'kanban-card', task.title);
+        completedColumn.appendChild(taskCard);
+    }); 
 
     // Adiciona as colunas ao quadro Kanban
     kanbanBoard.appendChild(todoColumn);

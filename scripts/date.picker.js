@@ -1,5 +1,5 @@
 import { months, renderCalendar, } from "./calendar.js";
-import { tasks } from "./calendar-setup.js";
+import { getTasks } from "./states.js";
 
 export function setupDatePicker() {
         const dateButton = document.querySelector('.title-bar__month');
@@ -51,7 +51,7 @@ export function setupDatePicker() {
         function updateMonth(){
             dateButton.textContent = months[monthToRenderTasks] + '/' + yearToRenderTasks;
             localStorage.setItem('monthToRenderTasks', monthToRenderTasks);
-            renderCalendar(tasks, yearToRenderTasks, monthToRenderTasks);
+            renderCalendar(getTasks(), yearToRenderTasks, monthToRenderTasks);
             datePickerContainer.classList.remove('visible');
         }
 }

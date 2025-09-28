@@ -34,15 +34,15 @@ function renderCreateTaskModal() {
 
     // --- Campo: Título ---
     const taskTitleLabel = createLabel("Título", "task-title-input");
-    const taskTitleInput = createInputElement("text", "task-title", "Ex: Fazer a lista de Cálculo");
+    const taskTitleInput = createInputElement("text", "title", "Ex: Fazer a lista de Cálculo");
     taskTitleInput.id = "task-title-input"; // Associa o input ao label
     taskTitleInput.required = true; // Torna o campo obrigatório
 
     // --- Campo: Data ---
     const dateContainer = createElement("div", "date-container");
     const taskDateLabel = createLabel("Data", "task-date-input");
-    const taskDateInput = createInputElement("date", "task-date");
-    const taskTimeInput = createInputElement("time", "task-time");
+    const taskDateInput = createInputElement("date", "date");
+    const taskTimeInput = createInputElement("time", "time");
     taskDateInput.id = "task-date-input";
     taskTimeInput.id = "task-time-input";
     taskDateInput.required = true;
@@ -61,7 +61,7 @@ function renderCreateTaskModal() {
     
     // --- Campo: Descrição ---
     const taskDescriptionLabel = createLabel("Descrição", "task-description-input");
-    const taskDescriptionInput = createTextAreaElement("task-description", "Detalhes da tarefa...");
+    const taskDescriptionInput = createTextAreaElement("description", "Detalhes da tarefa...");
     taskDescriptionInput.id = "task-description-input";
 
     // --- Campo: Prioridade (Radio Buttons) ---
@@ -78,7 +78,7 @@ function renderCreateTaskModal() {
     priorities.forEach(priority => {
         const radioWrapper = createElement("div", "radio-wrapper");
 
-        const radioInput = createInputElement("radio", "priority-input", "");
+        const radioInput = createInputElement("radio", "priority", "");
         radioInput.value = priority.value;
         radioInput.id = `priority-${priority.value}`;
         radioInput.checked = priority.value === "low";

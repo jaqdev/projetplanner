@@ -1,4 +1,4 @@
-import { chunk, createElement } from './utils.js';
+import { createElement, formatTasksToCalendar } from './utils.js';
 
 export const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
@@ -21,7 +21,6 @@ export function generateCalander(year, month) {
 
     let daysToFillBefore = firstDateOfCorrentMonth.getDay() -1 <0 ? 6 : firstDateOfCorrentMonth.getDay() -1;
     let daysToFillAfter = Math.abs(lastDateOfCurrentMonth.getDay() - 7) < 6 ? Math.abs(lastDateOfCurrentMonth.getDay() - 7) : 0;
-
     let calendar = [];
 
     for (let i = daysToFillBefore; i > 0; i--) {
@@ -44,9 +43,10 @@ export function generateCalander(year, month) {
  * Busca os dias do mês, divide em semanas e exibe cada dia com a quantidade de tarefas.
  * Remove semanas antigas antes de adicionar as novas.
  * 
- * Utiliza os dados de tarefas do arquivo 'tasks.json'.
  */
-export async function renderCalendar(tasks, year = new Date().getFullYear(), month = new Date().getMonth()) {
+export async function renderCalendar(tasks = [], year = new Date().getFullYear(), month = new Date().getMonth()) {
+
+  tasks = formatTasksToCalendar(tasks);
 
   let calendar = generateCalander(year, month);
 

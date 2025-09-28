@@ -30,3 +30,38 @@ export function createElement(tag, className, text) {
 
     return element;
 }
+
+export function formatTasksToCalendar(tasks = []) {
+    if (tasks.length === 0) return {};
+
+    return tasks.reduce((acc, task) => {
+        let {date, title, time, priority, description, status} = task;
+        let entireDay = task['entire-day'] === "on" ? true : false;
+        const formattedTask = { title, description, date, time, priority, status, entireDay };
+
+        if (!acc[date]) {
+            acc[date] = [formattedTask];
+            return acc;
+        }
+        acc[date].push(formattedTask);
+        return acc;
+    }, {});
+}
+
+export function formatTasksToKanban(tasks = []) {
+    if (tasks.length === 0) return {};
+
+    return tasks.reduce((acc, task) => {
+        let {date, title, time, priority, description, status} = task;
+        let entireDay = task['entire-day'] === "on" ? true : false;
+
+        const formattedTask = { title, description, date, time, priority, status, entireDay };
+
+        if (!acc[status]) {
+            acc[status] = [formattedTask];
+            return acc;
+        }
+        acc[status].push(formattedTask);
+        return acc;
+    }, {});
+}
