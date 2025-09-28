@@ -12,6 +12,14 @@ import {createElement, formatTasksToKanban} from './utils.js'
  *   }
  */
 export function renderKanban(tasks) {
+    // Formata as tarefas para o layout Kanban
+    tasks = formatTasksToKanban(tasks);
+
+    let todoTasks = tasks['todo'] || [];
+    let inProgressTasks = tasks['progress'] || [];
+    let completedTasks = tasks['completed'] || [];
+
+    // Seleciona o container principal onde o Kanban será renderizado
     const mainContainer = document.querySelector('.main__container');
 
     // Limpa o conteúdo existente para renderizar o Kanban
@@ -31,9 +39,9 @@ export function renderKanban(tasks) {
     const completedTitleContainer = createElement('div', 'kanban-column-title-container');
 
     // Cria os títulos das colunas
-    const todoTitle = createElement('span', 'kanban-column-title', 'A Fazer');
-    const inProgressTitle = createElement('span', 'kanban-column-title', 'Em Progresso');
-    const completedTitle = createElement('span', 'kanban-column-title', 'Concluído');
+    const todoTitle = createElement('span', 'kanban-column-title', 'A Fazer: ' + todoTasks.length);
+    const inProgressTitle = createElement('span', 'kanban-column-title', 'Em Progresso: ' + inProgressTasks.length);
+    const completedTitle = createElement('span', 'kanban-column-title', 'Concluído: ' + completedTasks.length);
 
     // Adiciona os títulos aos containers
     todoTitleContainer.appendChild(todoTitle);
@@ -83,13 +91,6 @@ export function renderKanban(tasks) {
     completedColumn.addEventListener('drop', (e) => {
         handleDrop(e, 'completed');
     });
-
-    // Formata as tarefas para o layout Kanban
-    tasks = formatTasksToKanban(tasks);
-
-    let todoTasks = tasks['todo'] || [];
-    let inProgressTasks = tasks['progress'] || [];
-    let completedTasks = tasks['completed'] || [];
 
     todoTasks.forEach(task => {
         const taskCard = createElement('div', 'kanban-card', task.title);
@@ -160,8 +161,10 @@ export function renderKanban(tasks) {
         if(column === 'completed') targetColumn = completedColumn;
         if(column === 'progress') targetColumn = inProgressColumn;
 
+        
         targetColumn.appendChild(taskCard);
-     
+        
+        updateColumnTitles();
         event.dataTransfer.clearData();
     }
 
@@ -175,6 +178,12 @@ export function renderKanban(tasks) {
         task.status = status;
         updateTask(id, task);
         saveTasksToStorage();
+    }
+
+    function updateColumnTitles(){
+        todoTitle.textContent = 'A Fazer: '.concat(todoColumn.childElementCount - 1);
+        inProgressTitle.textContent = 'Em Progresso: '.concat(inProgressColumn.childElementCount - 1);
+        completedTitle.textContent = 'Concluído: '.concat(completedColumn.childElementCount - 1);
     }
 }
 
