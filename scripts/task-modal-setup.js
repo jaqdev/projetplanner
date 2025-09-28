@@ -1,3 +1,4 @@
+import { handleCheckEntireDay, handleFormSubmit } from "./task-form-handler.js";
 import { createElement } from "./utils.js";
 
 export function setupCreateTaskButton(){
@@ -57,7 +58,7 @@ function renderCreateTaskModal() {
     entireDayContainer.appendChild(entireDayInput);
     entireDayContainer.appendChild(entireDayLabel);
     entireDayInput.addEventListener("change", handleCheckEntireDay);
-
+    
     // --- Campo: Descrição ---
     const taskDescriptionLabel = createLabel("Descrição", "task-description-input");
     const taskDescriptionInput = createTextAreaElement("task-description", "Detalhes da tarefa...");
@@ -109,24 +110,6 @@ function renderCreateTaskModal() {
 
     body.append(overlay);
 
-}
-
-function handleFormSubmit(event){
-    event.preventDefault();
-    const form = event.target;
-    
-    const formData = new FormData(form);
-    const formJson = {};
-    for (const [key, value] of formData) {
-        formJson[key] = value;
-    }
-    console.log(formJson);
-}
-
-function handleCheckEntireDay(){
-    const timeInput = document.getElementById("task-time-input");
-    timeInput.classList.toggle("invisible");
-    timeInput.value = null;
 }
 
 /**
