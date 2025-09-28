@@ -55,27 +55,23 @@ export async function renderCalendar(tasks, year = new Date().getFullYear(), mon
 
   console.log("Renderizando calendário para:", firstDate.toLocaleDateString('en-CA'), "até", lastDate.toLocaleDateString('en-CA'));
 
-  const weeks = chunk(calendar);
-
   const mainContainer = document.querySelector('.main__container');
+  const calendarContainer = document.createElement('div');
+  calendarContainer.classList.add('real-calendar-container');
 
   mainContainer.innerHTML = "";
 
   renderCalendarTopBar();
 
-  weeks.forEach(week => {
-    let weekRow = document.createElement('div');
-    weekRow.classList.add('calendar__week');
-    week.forEach(day => {
-        
+    calendar.forEach(day => {
       let dayCell = document.createElement('div');
       dayCell.classList.add('calendar__day');
       day.currentMonth == false && dayCell.classList.add('inactive');
       dayCell.innerHTML = `<span class="calendar__date">${day.date.getDate()}</span><span class="calendar__task">${tasks[day.date.toLocaleDateString('en-CA')]?.length || 0}</span>`;
-      weekRow.appendChild(dayCell);
+      calendarContainer.appendChild(dayCell);
     });
-    document.querySelector('.main__container').appendChild(weekRow);
-  });
+
+    mainContainer.appendChild(calendarContainer);
 
   console.log("Calendário renderizado com sucesso.");
 }

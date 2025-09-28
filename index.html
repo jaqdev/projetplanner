@@ -16,55 +16,58 @@
     <main class="calendar-contain">
 
   <section class="title-bar">
-    <button class="title-bar__burger">
+    <div class="tittle-bar__left-wrapper">
+      <button class="title-bar__burger">
       <span class="burger__lines">Toggle Menu</span>
-    </button>
-    <span class="title-bar__year">
-      Plano de Estudos
-    </span>
-
-    <div class="title-bar__date-controls">
-      <button class="title-bar__month">
-        Mês/ano
       </button>
+      <span class="title-bar__company">
+        Plano de Estudos
+      </span>
+    </div>
 
-      <div class="title-bar__date-picker">
-        <div class="title-bar__year-container">
-          <button class="title_bar__prev-year"><</button>
-          <span id="title_bar__selected-year">2025</span>
-          <button class="title_bar__next-year">></button>
-        </div>
-
-        <div class="title-bar__month-container">
-          <button class="title-bar__month-option" data-month="0">Jan</button>
-          <button class="title-bar__month-option" data-month="1">Fev</button>
-          <button class="title-bar__month-option" data-month="2">Mar</button>
-          <button class="title-bar__month-option" data-month="3">Abr</button>
-          <button class="title-bar__month-option" data-month="4">Maio</button>
-          <button class="title-bar__month-option" data-month="5">Jun</button>
-          <button class="title-bar__month-option" data-month="6">Jul</button>
-          <button class="title-bar__month-option" data-month="7">Ago</button>
-          <button class="title-bar__month-option" data-month="8">Set</button>
-          <button class="title-bar__month-option" data-month="9">Out</button>
-          <button class="title-bar__month-option" data-month="10">Nov</button>
-          <button class="title-bar__month-option" data-month="11">Dez</button>
+    <div class="tittle-bar__right-wrapper">
+      <div class="title-bar__date-controls">
+        <button class="title-bar__month">
+          Mês/ano
+        </button>
+        <div class="title-bar__date-picker">
+          <div class="title-bar__year-container">
+            <button class="title_bar__prev-year"><</button>
+            <span id="title_bar__selected-year">2025</span>
+            <button class="title_bar__next-year">></button>
+          </div>
+          <div class="title-bar__month-container">
+            <button class="title-bar__month-option" data-month="0">Jan</button>
+            <button class="title-bar__month-option" data-month="1">Fev</button>
+            <button class="title-bar__month-option" data-month="2">Mar</button>
+            <button class="title-bar__month-option" data-month="3">Abr</button>
+            <button class="title-bar__month-option" data-month="4">Maio</button>
+            <button class="title-bar__month-option" data-month="5">Jun</button>
+            <button class="title-bar__month-option" data-month="6">Jul</button>
+            <button class="title-bar__month-option" data-month="7">Ago</button>
+            <button class="title-bar__month-option" data-month="8">Set</button>
+            <button class="title-bar__month-option" data-month="9">Out</button>
+            <button class="title-bar__month-option" data-month="10">Nov</button>
+            <button class="title-bar__month-option" data-month="11">Dez</button>
+          </div>
         </div>
       </div>
-    </div>
-
-   </div>
-    <div class="title-bar__controls">
-      <div class="title-bar__minimize"></div>
-      <div class="title-bar__maximize"></div>
-      <div class="title-bar__close"></div>
-    </div>
+        <div class="title-bar__controls">
+          <div class="title-bar__minimize"></div>
+          <div class="title-bar__maximize"></div>
+          <div class="title-bar__close"></div>
+        </div>
+        
+        <!-- Botão de alternar tema -->
+        <button id="toggle-theme" class="theme-btn">🌙</button>
+        </div>
+      </div>
+      </div>
       
-    <!-- Botão de alternar tema -->
-    <button id="toggle-theme" class="theme-btn">🌙</button>
-    </div>
 </section>
 
-  <aside class="menu__sidebar">
+<div class="wrapper">
+    <aside class="menu__sidebar">
 
     <button id="create-task-button" type="button">
       <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,8 +91,9 @@
 
   
   <section class="main__container">
-
+    
   </section>
+</div>
 
 </main>
 

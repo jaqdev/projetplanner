@@ -1,8 +1,3 @@
-body { font-family:"Quicksand", sans-serif;
-
-
-}
-
 /* Paleta padrão (modo claro) */
 :root {
   --cor-black: #000000;
@@ -10,40 +5,38 @@ body { font-family:"Quicksand", sans-serif;
   --white: #eeeeee;
   --cor-preto: #000000fb; 
   --cinza: #000000;
-  --background-menu: #f5f5f5;
+  --background-menu: #2b2b2b;
+  --highlight: #e1e2e2;
+  --border: #7a7a7a;
+}
+
+html, body {
+  font-size: 100%;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family:"Quicksand", sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+body { 
+  background-color: var(--cor-white);
+  color: var(--cor-black);
 }
 
 /* Modo escuro */
 body.dark-mode {
- background-image: linear-gradient(45deg, var(--cinza) 0%, var(--cor-preto) 100%);
-  color: var(--cor-black);
-}
-
-/* Exemplo de uso */
-body {
-  background-color: var(--cor-white);
-  color: var(--cor-black);
-}
-
-* {
-  outline: none;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 100%;
-}
-
-body.dark-mode {
   --cor-black: #ffffff;
   --cor-white: #121212;
   --blackblack: #000000;
-  --highlight: #dce0e4;
   --accent: #e7f0eb;
-  
+  --highlight: #222222;
+  --border: #888787;
   background-color: var(--cor-white);
   color: var(--cor-black);
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   -webkit-font-smoothing: antialiased;
@@ -57,15 +50,12 @@ p, span, ul, li {
 }
 
 .calendar-contain {
-  position: relative;
   left: 0;
   right: 0;
   border-radius: 0;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
-  max-width: 1020px;
-  min-width: 450px;
-  margin: 1rem auto;
   background-color: var(--blackblack);
   box-shadow: 5px 5px 72px rgba(30, 46, 50, 0.5);
   color: var(--cor-black);
@@ -76,6 +66,14 @@ p, span, ul, li {
   }
 }
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+}
+
 .title-bar {
   position: relative;
   width: 100%;
@@ -83,13 +81,8 @@ p, span, ul, li {
   align-items: center;
   justify-content: start;
   background:var(--cor-white);
-  padding: 0.5rem;
+  padding: 0.5rem 0 0 0 ;
   margin-bottom: 0;
-
-  &:after {
-    display: table;
-    clear: both;
-  }
 }
 
 .title-bar__burger {
@@ -146,24 +139,30 @@ p, span, ul, li {
   }
 }
 
-.title-bar__year {
-  display: block;
-  position: relative;
-  float: left;
+.title-bar__company {
   font-size: 1rem;
   line-height: 30px;
-  width: 43%;
-  padding: 0 0.5rem;
-  text-align: left;
+}
 
-  @media screen and (min-width:55em) {
-    width: 27%;
-  }
+.tittle-bar__left-wrapper {
+  display: flex;
+  width: 20%;
+}
+
+.tittle-bar__right-wrapper {
+  position: relative;
+  width: 76.2%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .title-bar__date-controls {
-  position: relative;
-  
+  justify-self: flex-start;
+  position: absolute;
+  left: 0;
+  margin-left: 1px;
+
   button {
     color: var(--cor-black);
   }
@@ -175,6 +174,7 @@ p, span, ul, li {
   }
 
   .title-bar__date-picker{
+    z-index: 1000;
     display: none;
     position: absolute;
     top: calc(100% + 10px);
@@ -307,12 +307,10 @@ p, span, ul, li {
 }
 
 .title-bar__controls{
-  position: absolute;
   right: 50px;
 }
 
 .theme-btn {
-   position: absolute;
   right: 10px;
 }
 
@@ -369,19 +367,11 @@ p, span, ul, li {
 }
 
 .menu__sidebar {
-  width: 100%;
   margin: 0 auto;
-  float: none;
   background:var(--cor-white);
   padding-bottom: 0.7rem;
-  
-  @media screen and (min-width:55em) {
-    position: absolute;
-    height: 100%;
-    width: 30%;
-    float: left;
-    margin-bottom: 0;
-  }
+  width: 20%;
+  height: 100%;
 }
 
 .menu__sidebar #create-task-button {
@@ -462,32 +452,37 @@ p, span, ul, li {
 }
 
 .main__container {
-  display: flex;
   flex-flow: column wrap;
-  align-items: stretch;
-  width: 100%;
-  float: none;
+  display: flex;
+  width: 80%;
   min-height: 580px;
   height: 100%;
   font-size: 12px;
-  padding: 0.8rem 0 1rem 1rem;
   background:var(--cor-white);
+  padding: 1rem 0 0 0;
+}
 
-  @media screen and (min-width:55em) {
-    width: 70%;
-    float: right;
-  }
+.real-calendar-container{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-radius: 5px;
+  height: 85%;
+  width: 95%;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
 }
 
 .calendar__top-bar {
+  width: 95%;
   display: flex;
   flex: 32px 0 0;
 }
 
 .top-bar__days {
   width: 100%;
+  text-align: center;
   padding: 0 5px;
-  color: lighten(var(--cor-black), 20%);
+  color: lighten(var(--highlight), 20%);
   font-weight: 100;
   -webkit-font-smoothing: subpixel-antialiased;
   font-size: 1rem;
@@ -499,11 +494,21 @@ p, span, ul, li {
 }
 
 .calendar__day {
+  border: 1px solid var(--border);
+  position: relative;
   display: flex;
-  flex-flow: column wrap;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 1.9rem 0.2rem 0.2rem;
+
+  &:hover {
+    background-color: var(--highlight);
+    cursor: pointer;
+    opacity: .8;
+    transition: all 0.3s ease;
+  }
+
 }
 
 .calendar__date {
@@ -516,29 +521,20 @@ p, span, ul, li {
     font-size: 2.3rem;
   }
 }
-.calendar__date:hover { 
-  color: silver
-
-
-}
-
-.calendar__week {
-  .inactive {
-    .calendar__date,
-    .task-count {
-      color: #c6c6c6;
-    }
-  }
-
-  .today {
-    .calendar__date {
-      color: var(--cor-preto);
-    }
-  }
-}
 
 .calendar__task {
-  color: var(--cor-black);
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 30%;
+  top: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #baffc9;
+  border-radius: 50%;
+
+  color: black;
   display: flex;
   font-size: 0.8rem;
 
@@ -603,7 +599,7 @@ p, span, ul, li {
   background-color: var(--cor-white);
   border-radius: 7%;
   padding: 50px 30px;
-  box-shadow: 1px 1px 10px var(--cor-black) ;
+  box-shadow: 1px 1px 5px var(--cor-black) ;
 }
 
 .modal-overlay {
