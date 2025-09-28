@@ -1,7 +1,8 @@
 import { renderCalendar } from "./calendar.js";
 import { monthToRenderTasks, yearToRenderTasks} from "./calendar-setup.js";
-import { formatTasksToCalendar } from "./utils.js";
-import { addTask, getTasks, loadTasksFromStorage, saveTasksToStorage } from "./states.js";
+import { addTask, getTasks, saveTasksToStorage } from "./states/task-state.js";
+import { getCurrentView } from "./states/view-state.js";
+import { renderKanban } from "./kanban.js";
 
 export function handleFormSubmit(event){
     event.preventDefault();
@@ -12,6 +13,10 @@ export function handleFormSubmit(event){
     formJson["id"]  = crypto.randomUUID();
     formJson["status"] = "todo";
     for (const [key, value] of formData) {
+        if(key === "entire-day"){
+            formJson["entireDay"] = value === "on" ? true : false;
+            continue;
+        }
         formJson[key] = value;
     }
 
@@ -26,7 +31,14 @@ export function handleFormSubmit(event){
     saveTasksToStorage();
     form.reset();
     document.querySelector('.modal-overlay').remove();
-    renderCalendar(formatTasksToCalendar(getTasks()), yearToRenderTasks, monthToRenderTasks);
+    if(getCurrentView() === 'calendar'){
+        renderCalendar(getTasks(), yearToRenderTasks, monthToRenderTasks);
+        return;
+    }
+    if(getCurrentView() === 'kanban'){
+        renderKanban(getTasks());
+        return;
+    }
 }
 
 export function handleCheckEntireDay(){

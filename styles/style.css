@@ -6,8 +6,9 @@
   --cor-preto: #000000fb; 
   --cinza: #000000;
   --background-menu: #2b2b2b;
-  --highlight: #e1e2e2;
+  --highlight: #ced1d1;
   --border: #7a7a7a;
+  --box-shadow: rgba(0, 0, 0, 0.4);
 }
 
 html, body {
@@ -565,31 +566,57 @@ p, span, ul, li {
     gap: 20px; /* Adiciona espaço entre as colunas */
     width: 100%;
     min-height: 580px;
+    padding: 50px 0;
+    overflow: scroll;
 }
 
 .kanban-column {
-    flex-basis: 33.33%; /* Dá a cada coluna 1/3 do espaço */
-    background-color: var(--blackblack);
+    height: fit-content;
+    width: 15%;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+    background-color: var(--blackblack);
+}
+
+.kanban-column-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .kanban-column-title {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 15px;
     color: var(--cor-black);
-    text-align: center;
+    text-align: left;
+}
+
+.kanban-column .add-task-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2em;
+  color: var(--cor-black)
 }
 
 .kanban-card {
-    background-color: var(--cor-white);
+    height: 70px;
+    background-color: var(--highlight);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     color: var(--cor-black);
+    font-size: 1.2em;
+}
+
+.kanban-card:hover {
+    cursor: pointer;
+    opacity: .8;
+    transition: all 0.3s ease;
+    background-color: var(--highlight);
 }
 
 .create-task-modal {

@@ -13,6 +13,14 @@ export function addTask(task){
     tasks.push(task);
 }
 
+export function findTaskById(id){
+    return tasks.find(task => task.id === id);
+}
+
+export function updateTask(id, updatedTask){
+    tasks = tasks.map(task => task.id === id ? {...task, ...updatedTask} : task);
+}
+
 export function saveTasksToStorage() {
   localStorage.setItem('tasks', JSON.stringify(getTasks()));
 }

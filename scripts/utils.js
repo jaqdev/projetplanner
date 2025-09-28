@@ -35,9 +35,8 @@ export function formatTasksToCalendar(tasks = []) {
     if (tasks.length === 0) return {};
 
     return tasks.reduce((acc, task) => {
-        let {date, title, time, priority, description, status} = task;
-        let entireDay = task['entire-day'] === "on" ? true : false;
-        const formattedTask = { title, description, date, time, priority, status, entireDay };
+        let { id, date, title, time, priority, description, status, entireDay} = task;
+        const formattedTask = { id, title, description, date, time, priority, status, entireDay };
 
         if (!acc[date]) {
             acc[date] = [formattedTask];
@@ -52,10 +51,9 @@ export function formatTasksToKanban(tasks = []) {
     if (tasks.length === 0) return {};
 
     return tasks.reduce((acc, task) => {
-        let {date, title, time, priority, description, status} = task;
-        let entireDay = task['entire-day'] === "on" ? true : false;
+        let { id, date, title, time, priority, description, status, entireDay} = task;
 
-        const formattedTask = { title, description, date, time, priority, status, entireDay };
+        const formattedTask = { id, title, description, date, time, priority, status, entireDay };
 
         if (!acc[status]) {
             acc[status] = [formattedTask];

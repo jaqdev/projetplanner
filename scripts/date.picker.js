@@ -1,5 +1,5 @@
 import { months, renderCalendar, } from "./calendar.js";
-import { getTasks } from "./states.js";
+import { getTasks } from "./states/task-state.js";
 
 export function setupDatePicker() {
         const dateButton = document.querySelector('.title-bar__month');

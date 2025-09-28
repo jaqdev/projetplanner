@@ -11,7 +11,7 @@ export function setupCreateTaskButton(){
 
 }
 
-function renderCreateTaskModal() {
+export function renderCreateTaskModal() {
 
     const body = document.getElementsByTagName("body")[0];
 

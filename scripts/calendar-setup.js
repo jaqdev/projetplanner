@@ -1,5 +1,5 @@
 import { renderCalendar } from './calendar.js';
-import { getTasks, loadTasksFromStorage, setTasks } from './states.js';
+import { getTasks, loadTasksFromStorage, setTasks } from './states/task-state.js';
 import { formatTasksToCalendar } from './utils.js';
 
 // Month and year to render tasks, default to current month and year
