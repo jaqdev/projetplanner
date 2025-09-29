@@ -529,6 +529,10 @@ p, span, ul, li {
   @media screen and (min-width:55em) {
     font-size: 2.3rem;
   }
+
+  &.inactive {
+    opacity: .4;
+  }
 }
 
 .calendar__task {
@@ -553,6 +557,11 @@ p, span, ul, li {
   &.calendar__task--today {
     color: var(--cor-preto);
   }
+
+   &.inactive {
+    opacity: .4;
+  }
+
 }
 
 /* Estilo para o Quadro Kanban */

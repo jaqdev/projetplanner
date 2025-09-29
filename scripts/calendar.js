@@ -20,8 +20,8 @@ export function generateCalander(year, month) {
     let lastDateOfCurrentMonth = new Date(CURRENT_YEAR, CURRENT_MONTH + 1, 0);
     let lastDateOfPreviousMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 0);
 
-    let daysToFillBefore = firstDateOfCorrentMonth.getDay() -1 <0 ? 6 : firstDateOfCorrentMonth.getDay() -1;
-    let daysToFillAfter = Math.abs(lastDateOfCurrentMonth.getDay() - 7) < 6 ? Math.abs(lastDateOfCurrentMonth.getDay() - 7) : 0;
+    let daysToFillBefore = firstDateOfCorrentMonth.getDay() -1 < 0 ? 6 : firstDateOfCorrentMonth.getDay() -1;
+    let daysToFillAfter = Math.abs(lastDateOfCurrentMonth.getDay() - 7) <= 6 ? Math.abs(lastDateOfCurrentMonth.getDay() - 7) : 0;
     let calendar = [];
 
     for (let i = daysToFillBefore; i > 0; i--) {
@@ -47,6 +47,9 @@ export function generateCalander(year, month) {
  */
 export async function renderCalendar(tasks = [], year = new Date().getFullYear(), month = new Date().getMonth()) {
 
+  console.log("Renderizando calendário para:", month, "/", year);
+  
+
   tasks = formatTasksToCalendar(tasks);
 
   let calendar = generateCalander(year, month);
@@ -69,9 +72,11 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
       let dayCell = document.createElement('div');
       dayCell.classList.add('calendar__day');
       let dateFormatted = day.date.toLocaleDateString('en-CA');
-      day.currentMonth == false && dayCell.classList.add('inactive');
       let calendarDate =  createElement('span', 'calendar__date', day.date.getDate());
       let calendarTask = createElement('span', 'calendar__task', tasks[dateFormatted]?.length || "0");
+
+      day.currentMonth == false && calendarDate.classList.add('inactive');
+      day.currentMonth == false && calendarTask.classList.add('inactive');
       
       dayCell.addEventListener('click', () => {
         renderTaskListModal(tasks, dateFormatted);

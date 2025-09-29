@@ -1,6 +1,6 @@
-import { monthToRenderTasks, setupCalendar, yearToRenderTasks } from "./calendar-setup.js";
 import { renderCalendar } from "./calendar.js";
 import { renderKanban } from "./kanban.js";
+import { getMonthToRenderTasks, getYearToRenderTasks } from "./states/date-state.js";
 import { getTasks } from "./states/task-state.js";
 import { setCurrentView } from "./states/view-state.js";
 
@@ -13,7 +13,7 @@ export function setupMenu(){
       let option = e.currentTarget.dataset.option;
       if (option === 'calendar') {
         setCurrentView('calendar');
-        renderCalendar(getTasks(), yearToRenderTasks, monthToRenderTasks);
+        renderCalendar(getTasks(), getYearToRenderTasks(), getMonthToRenderTasks());
       } 
       else if (option === 'kanban') {
           setCurrentView('kanban');

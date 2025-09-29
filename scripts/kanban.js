@@ -12,7 +12,7 @@ import {createElement, formatTasksToKanban} from './utils.js'
  *     status: string   // Status da tarefa: "todo", "progress" ou "completed"
  *   }
  */
-export function renderKanban(tasks) {
+export function renderKanban(tasks = []) {
     // Formata as tarefas para o layout Kanban
     tasks = formatTasksToKanban(tasks);
 

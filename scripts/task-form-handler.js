@@ -1,8 +1,8 @@
 import { renderCalendar } from "./calendar.js";
-import { monthToRenderTasks, yearToRenderTasks} from "./calendar-setup.js";
 import { addTask, getTasks, saveTasksToStorage } from "./states/task-state.js";
 import { getCurrentView } from "./states/view-state.js";
 import { renderKanban } from "./kanban.js";
+import { getMonthToRenderTasks, getYearToRenderTasks } from "./states/date-state.js";
 
 export function handleFormSubmit(event){
     event.preventDefault();
@@ -32,7 +32,7 @@ export function handleFormSubmit(event){
     form.reset();
     document.querySelector('.modal-overlay').remove();
     if(getCurrentView() === 'calendar'){
-        renderCalendar(getTasks(), yearToRenderTasks, monthToRenderTasks);
+        renderCalendar(getTasks(), getYearToRenderTasks(), getMonthToRenderTasks());
         return;
     }
     if(getCurrentView() === 'kanban'){

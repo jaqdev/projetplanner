@@ -1,4 +1,5 @@
 import { months, renderCalendar, } from "./calendar.js";
+import { getMonthToRenderTasks, getYearToRenderTasks, setMonthToRenderTasks, setYearToRenderTasks } from "./states/date-state.js";
 import { getTasks } from "./states/task-state.js";
 
 export function setupDatePicker() {
@@ -6,11 +7,8 @@ export function setupDatePicker() {
         const datePickerContainer = document.querySelector('.title-bar__date-picker');
         const selectedYearTitle = document.getElementById('title_bar__selected-year');
 
-        let monthToRenderTasks = localStorage.getItem('monthToRenderTasks') || (new Date().getMonth());
-        let yearToRenderTasks = localStorage.getItem('yearToRenderTasks') || new Date().getFullYear();
-
-        dateButton.textContent = months[monthToRenderTasks] + '/' + yearToRenderTasks;
-        selectedYearTitle.textContent = yearToRenderTasks;
+        dateButton.textContent = months[getMonthToRenderTasks()] + '/' + getYearToRenderTasks();
+        selectedYearTitle.textContent = getYearToRenderTasks();
 
         // Toggle date picker visibility
         dateButton.addEventListener('click', () => {
@@ -23,12 +21,12 @@ export function setupDatePicker() {
 
         // Event listeners to change year 
         prevYearButton.addEventListener('click', () => {
-            yearToRenderTasks -= 1;
+            setYearToRenderTasks(getYearToRenderTasks() - 1);
             updateYear();
         });
 
         nextYearButton.addEventListener('click', () => {
-            yearToRenderTasks += 1;
+            setYearToRenderTasks(getYearToRenderTasks() + 1);
             updateYear();
         });
 
@@ -37,21 +35,20 @@ export function setupDatePicker() {
         // Add event listeners to change month
         monthsButtosns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                monthToRenderTasks = e.currentTarget.dataset.month;
+                setMonthToRenderTasks(parseInt(e.currentTarget.dataset.month));
                 updateMonth();                
             });
         });
 
         function updateYear(){
-            localStorage.setItem('yearToRenderTasks', yearToRenderTasks);
-            selectedYearTitle.textContent = yearToRenderTasks;
-            dateButton.textContent = months[monthToRenderTasks] + '/' + yearToRenderTasks;
+            localStorage.setItem('yearToRenderTasks', getYearToRenderTasks());
+            selectedYearTitle.textContent = getYearToRenderTasks();
+            dateButton.textContent = months[getMonthToRenderTasks()] + '/' + getYearToRenderTasks;
         }
 
         function updateMonth(){
-            dateButton.textContent = months[monthToRenderTasks] + '/' + yearToRenderTasks;
-            localStorage.setItem('monthToRenderTasks', monthToRenderTasks);
-            renderCalendar(getTasks(), yearToRenderTasks, monthToRenderTasks);
+            dateButton.textContent = months[getMonthToRenderTasks()] + '/' + getYearToRenderTasks();
+            renderCalendar(getTasks(), getYearToRenderTasks(), getMonthToRenderTasks());
             datePickerContainer.classList.remove('visible');
         }
 }
