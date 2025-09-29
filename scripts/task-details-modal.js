@@ -177,6 +177,7 @@ export function renderTaskDetailsModal(task) {
         modalOverlay.remove();
        if(getCurrentView() === 'calendar'){
             document.querySelector(".modal-overlay").remove();
+            renderCalendar(getTasks(), getYearToRenderTasks(), getMonthToRenderTasks());
             renderTaskListModal(formatTasksToCalendar(getTasks()), task.date);
             return;
         }
@@ -195,7 +196,8 @@ export function renderTaskDetailsModal(task) {
         modalOverlay.remove();
         if(getCurrentView() === 'calendar'){
             document.querySelector(".modal-overlay").remove();
-                renderTaskListModal(formatTasksToCalendar(getTasks()), task.date);
+            renderCalendar(getTasks(), getYearToRenderTasks(), getMonthToRenderTasks());
+            renderTaskListModal(formatTasksToCalendar(getTasks()), task.date);
             return;
         }
         if(getCurrentView() === 'kanban'){
