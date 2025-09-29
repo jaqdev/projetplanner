@@ -1,4 +1,5 @@
-import { findTaskById, saveTasksToStorage, updateTask } from './states/task-state.js';
+import { findTaskById, getTasks, saveTasksToStorage, updateTask } from './states/task-state.js';
+import { createTaskCard } from './task-list-modal.js';
 import { renderCreateTaskModal } from './task-modal-setup.js';
 import {createElement, formatTasksToKanban} from './utils.js'
 
@@ -29,9 +30,14 @@ export function renderKanban(tasks) {
     const kanbanBoard = createElement('div', 'kanban-board');
   
     // Cria as colunas do Kanban
-    const todoColumn = createElement('div', 'kanban-column');
-    const inProgressColumn = createElement('div', 'kanban-column');
-    const completedColumn = createElement('div', 'kanban-column');
+    const todoColumn = createElement('ul', 'kanban-column');
+    const inProgressColumn = createElement('ul', 'kanban-column');
+    const completedColumn = createElement('ul', 'kanban-column');
+
+    // Adiciona classes específicas para estilização das listas de tarefas
+    todoColumn.classList.add('task-list');
+    inProgressColumn.classList.add('task-list');
+    completedColumn.classList.add('task-list');
 
     // Cria o container do titulo do Kanban
     const todoTitleContainer = createElement('div', 'kanban-column-title-container');
@@ -93,35 +99,20 @@ export function renderKanban(tasks) {
     });
 
     todoTasks.forEach(task => {
-        const taskCard = createElement('div', 'kanban-card', task.title);
-        taskCard.id = task.id;
-        taskCard.setAttribute('draggable', 'true');
-        taskCard.addEventListener('dragstart', handleDragStart);
-        taskCard.addEventListener('dragend', (e) => {
-            e.dataTransfer.clearData();
-        });
+        let taskCard = createTaskCard(task, task.date, true);
+        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
         todoColumn.appendChild(taskCard);
     });
 
     inProgressTasks.forEach(task => {
-        const taskCard = createElement('div', 'kanban-card', task.title);
-        taskCard.id = task.id;
-        taskCard.setAttribute('draggable', 'true');
-        taskCard.addEventListener('dragstart', handleDragStart);
-        taskCard.addEventListener('dragend', (e) => {
-            e.dataTransfer.clearData();
-        });
+        let taskCard = createTaskCard(task, task.date, true);
+        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
         inProgressColumn.appendChild(taskCard);
     });
     
     completedTasks.forEach(task => {
-        const taskCard = createElement('div', 'kanban-card', task.title);
-        taskCard.id = task.id;
-        taskCard.setAttribute('draggable', 'true');
-        taskCard.addEventListener('dragstart', handleDragStart);
-        taskCard.addEventListener('dragend', (e) => {
-            e.dataTransfer.clearData();
-        });
+        let taskCard = createTaskCard(task, task.date, true);
+        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
         completedColumn.appendChild(taskCard);
     }); 
 
@@ -133,10 +124,20 @@ export function renderKanban(tasks) {
     // Renderiza o Kanban no container principal
     mainContainer.appendChild(kanbanBoard);
 
+    function addKanbanCardDefaultBehavior(taskCard, taskId){
+        taskCard.id = taskId;
+        taskCard.setAttribute('draggable', 'true');
+        taskCard.addEventListener('dragstart', handleDragStart);
+        taskCard.addEventListener('dragend', (e) => {
+            e.dataTransfer.clearData();
+        });
+        return taskCard;
+    }
+
     function handleDragOver(event){
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
-}  
+    }  
 
     function handleDrop(event, column){
         event.preventDefault();
@@ -147,20 +148,14 @@ export function renderKanban(tasks) {
         
         document.getElementById(taskId).remove();
         
-        const taskCard = createElement('div', 'kanban-card', task.title);
-        taskCard.id = task.id;
-        taskCard.setAttribute('draggable', 'true');
-        taskCard.addEventListener('dragstart', handleDragStart);
-        taskCard.addEventListener('dragend', (e) => {
-            e.dataTransfer.clearData();
-        });
+        let taskCard = createTaskCard(task, task.date, true);
+        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
 
         let targetColumn;
 
         if(column === 'todo') targetColumn = todoColumn;
         if(column === 'completed') targetColumn = completedColumn;
         if(column === 'progress') targetColumn = inProgressColumn;
-
         
         targetColumn.appendChild(taskCard);
         

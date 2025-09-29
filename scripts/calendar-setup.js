@@ -17,6 +17,6 @@ export function setupCalendar() {
 }
 
 async function loadTasks(){
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 300));
     loadTasksFromStorage();
 }

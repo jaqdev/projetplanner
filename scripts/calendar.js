@@ -1,3 +1,4 @@
+import { renderTaskListModal } from './task-list-modal.js';
 import { createElement, formatTasksToCalendar } from './utils.js';
 
 export const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
@@ -67,8 +68,17 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
     calendar.forEach(day => {
       let dayCell = document.createElement('div');
       dayCell.classList.add('calendar__day');
+      let dateFormatted = day.date.toLocaleDateString('en-CA');
       day.currentMonth == false && dayCell.classList.add('inactive');
-      dayCell.innerHTML = `<span class="calendar__date">${day.date.getDate()}</span><span class="calendar__task">${tasks[day.date.toLocaleDateString('en-CA')]?.length || 0}</span>`;
+      let calendarDate =  createElement('span', 'calendar__date', day.date.getDate());
+      let calendarTask = createElement('span', 'calendar__task', tasks[dateFormatted]?.length || "0");
+      
+      dayCell.addEventListener('click', () => {
+        renderTaskListModal(tasks, dateFormatted);
+      });
+      
+      dayCell.appendChild(calendarDate);
+      dayCell.appendChild(calendarTask);
       calendarContainer.appendChild(dayCell);
     });
 
