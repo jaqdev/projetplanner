@@ -1,5 +1,5 @@
-import { findTaskById, getTasks, saveTasksToStorage, updateTask } from './states/task-state.js';
-import { createTaskCard } from './task-list-modal.js';
+import { createTaskCard } from './create-card.js';
+import { findTaskById, saveTasksToStorage, updateTask } from './states/task-state.js';
 import { renderCreateTaskModal } from './task-modal-setup.js';
 import {createElement, formatTasksToKanban} from './utils.js'
 

@@ -109,7 +109,6 @@ export function renderCreateTaskModal() {
     overlay.append(formElement);
 
     body.append(overlay);
-
 }
 
 /**
@@ -118,7 +117,7 @@ export function renderCreateTaskModal() {
  * @param {string} [forId] - O ID do input que este label descreve.
  * @returns {HTMLLabelElement} O elemento label criado.
  */
-function createLabel(text, forId) {
+export function createLabel(text, forId) {
     const element = document.createElement("label");
     element.innerHTML = text;
     if (forId) {
@@ -134,7 +133,7 @@ function createLabel(text, forId) {
  * @param {string} [placeholder] - O texto de placeholder.
  * @returns {HTMLInputElement} O elemento input criado.
  */
-function createInputElement(type, name, placeholder) {
+export function createInputElement(type, name, placeholder) {
     const element = document.createElement("input");
     element.type = type;
     element.name = name;
@@ -150,7 +149,7 @@ function createInputElement(type, name, placeholder) {
  * @param {string} [placeholder] - O texto de placeholder.
  * @returns {HTMLTextAreaElement} O elemento textarea criado.
  */
-function createTextAreaElement(name, placeholder) {
+export function createTextAreaElement(name, placeholder) {
     const element = document.createElement("textarea");
     element.name = name;
     if (placeholder) {

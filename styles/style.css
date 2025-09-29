@@ -637,7 +637,7 @@ p, span, ul, li {
     background-color: var(--highlight);
 }
 
-.create-task-modal {
+.create-task-modal, .task-details__modal-container {
   z-index: 1000;
   position: absolute;
   top: 50%;
@@ -651,6 +651,10 @@ p, span, ul, li {
    box-shadow: .2px .2px 5px var(--cor-black); 
 }
 
+.task-details__modal-container {
+  padding: 30px;
+}
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -661,14 +665,14 @@ p, span, ul, li {
 }
 
 
-.create-task-modal label{
+.create-task-modal label, .task-details__modal-container label{
     display: block;
     margin-bottom: 8px;
     color: #555;
     font-weight: bold;
 }
 
-.create-task-modal input{
+.create-task-modal input, .task-details__modal-container input{
   width: 350px;
   height: 45px;
   padding: 10px;
@@ -679,6 +683,7 @@ p, span, ul, li {
   font-size: 16px;
   margin-bottom: 15px;
   outline: none;
+  color: var(--cor-black);
 
   &:focus {
         border: 2px solid #5f5d5d;
@@ -686,7 +691,7 @@ p, span, ul, li {
   }
 }
 
-.create-task-modal input[type="date"]{
+.create-task-modal input[type="date"], .task-details__modal-container input[type="date"]{
   width: 40%;
 }
 
@@ -694,7 +699,11 @@ p, span, ul, li {
   display: none;
 }
 
-.create-task-modal .date-container{
+.task-details__modal-container .date-container input[type="time"].invisible{
+  display: none;
+}
+
+.create-task-modal .date-container, .task-details__modal-container  .date-container{
   display: flex;
   gap: 15px;
 
@@ -703,7 +712,7 @@ p, span, ul, li {
   }
 }
 
-.create-task-modal .entire-day-container{
+.create-task-modal .entire-day-container, .task-details__modal-container .entire-day-container{
   display: flex;
   align-items: center;
   gap: 10px;
@@ -714,7 +723,7 @@ p, span, ul, li {
   }
 }
 
-.create-task-modal textarea {
+.create-task-modal textarea, .task-details__modal-container textarea{
   font-size: 1.3em;
   width: 350px;
   height: 130px;
@@ -726,6 +735,7 @@ p, span, ul, li {
   font-size: 16px;
   outline: none;
   margin-bottom: 15px;
+  color: var(--cor-black);
 
   &:focus {
       border: 2px solid #5f5d5d;
@@ -733,7 +743,7 @@ p, span, ul, li {
   }
 }
 
-.create-task-modal .priority-container {
+.create-task-modal .priority-container, .task-details__modal-container .priority-container{
   display: flex;
   align-items: center;
   justify-content: start;
@@ -841,7 +851,7 @@ p, span, ul, li {
   border-radius: 10px;
 }
 
-.task-list-modal-container .task-list li:hover {
+.task-item:hover {
   cursor: pointer;
   opacity: .8;
   transition: all 0.3s ease;
@@ -915,3 +925,63 @@ p, span, ul, li {
   background-color: #ffb3ba;
   color: #92242f;
 }
+
+.task-detail__modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-details__modal-container h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.task-details__modal-container .buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 15px;
+}
+
+.task-details__modal-container .buttons-container button {
+  width: 100px;
+  height: 40px;
+  border-radius: 100px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border: 2px solid #8d8c8c;
+  background-color: transparent;
+  color: var(--cor-black);
+  align-self: flex-end;
+  margin-top: 5px;
+  color: #555;
+  font-weight: bold;
+}
+
+.task-details__modal-container .buttons-container button:hover {
+  opacity: .9;
+  transition: opacity .3s ease;
+}
+
+.task-details__modal-container .buttons-container .edit-task-button {
+   background-color: #153da5;
+   color: white;
+   border: none;
+} 
+
+.task-details__modal-container .buttons-container .save-task-button {
+   background-color: #15a521;
+   color: white;
+   border: none;
+}
+
+.task-details__modal-container .buttons-container .delete-task-button {
+   background-color: rgb(167, 28, 28);
+   color: white;
+   border: none;
+} 

@@ -13,6 +13,10 @@ export function addTask(task){
     tasks.push(task);
 }
 
+export function deleteTask(id){
+    tasks = tasks.filter(task => task.id !== id); 
+}
+
 export function findTaskById(id){
     return tasks.find(task => task.id === id);
 }
