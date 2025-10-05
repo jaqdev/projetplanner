@@ -1,17 +1,3 @@
-/* Paleta padrão (modo claro) */
-:root {
-  --cor-black: #000000;
-  --cor-white: #ffffff;
-  --white: #eeeeee;
-  --cor-preto: #000000fb; 
-  --cinza: #000000;
-  --background-menu: #2b2b2b;
-  --highlight: #ced1d1;
-  --border: #7a7a7a;
-  --box-shadow: rgba(0, 0, 0, 0.4);
-  --task-bg: #b3afaf;
-}
-
 html, body {
   font-size: 100%;
   width: 100vw;
@@ -20,34 +6,16 @@ html, body {
   font-family:"Quicksand", sans-serif;
   margin: 0;
   overflow: hidden;
+  background-color: var(--background-color);
+  color: var(--font-color);
 }
-
-body { 
-  background-color: var(--cor-white);
-  color: var(--cor-black);
-}
-
-/* Modo escuro */
-body.dark-mode {
-  --cor-black: #ffffff;
-  --cor-white: #121212;
-  --blackblack: #000000;
-  --accent: #e7f0eb;
-  --highlight: #222222;
-  --border: #888787;
-  --task-bg: #b3afaf;
-
-  background-color: var(--cor-white);
-  color: var(--cor-black);
-}
-
 
 h1, h2, h3, h4, h5, h6 {
   -webkit-font-smoothing: antialiased;
 }
 
 p, span, ul, li {
-  color: lighten(var(--cor-black), 20%);
+  color: lighten(var(--font-color), 20%);
   font-weight: 100;
   -webkit-font-smoothing: subpixel-antialiased;
   font-size: 1rem;
@@ -60,9 +28,9 @@ p, span, ul, li {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--blackblack);
+  background-color: var(--background-color);
   box-shadow: 5px 5px 72px rgba(30, 46, 50, 0.5);
-  color: var(--cor-black);
+  color: var(--font-color);
 
   @media screen and (min-width: 55em) {
     margin: auto;
@@ -84,7 +52,7 @@ p, span, ul, li {
   display: flex;
   align-items: center;
   justify-content: start;
-  background:var(--cor-white);
+  background:var(--background-color);
   padding: 0.5rem 0 0 0 ;
   margin-bottom: 0;
 }
@@ -121,7 +89,7 @@ p, span, ul, li {
   right: 0;
   margin: auto;
   height: 1px;
-  background: var(--cor-black);
+  background: var(--font-color);
 
   &:before,
   &:after {
@@ -130,7 +98,7 @@ p, span, ul, li {
     left: 0;
     width: 100%;
     height: 1px;
-    background-color: var(--cor-black);
+    background-color: var(--font-color);
     content: "";
   }
 
@@ -168,7 +136,7 @@ p, span, ul, li {
   margin-left: 1px;
 
   button {
-    color: var(--cor-black);
+    color: var(--font-color);
   }
     
 
@@ -187,7 +155,7 @@ p, span, ul, li {
     flex-flow: column;
     gap: 15px;
     
-    background-color: var(--cor-white);
+    background-color: var(--background-color);
 
     box-shadow: #000000 0px 1px 5px;
 
@@ -207,7 +175,7 @@ p, span, ul, li {
         height: 30px;
         width: 30px;
         cursor: pointer;
-        color: var(--cor-black);
+        color: var(--font-color);
         background-color: transparent;
 
 
@@ -224,7 +192,7 @@ p, span, ul, li {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 5px;
-      color: var(--cor-black);
+      color: var(--font-color);
 
       button {
         height: 30px;
@@ -314,8 +282,139 @@ p, span, ul, li {
   right: 50px;
 }
 
-.theme-btn {
-  right: 10px;
+.btn-theme-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+
+  .btn-theme-circle {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+
+    &::before {
+      content: "";
+      width: 60%;
+      height: 60%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+    }
+  }
+
+  &:hover {
+    opacity: .8;
+    transition: opacity .2s ease;
+  }
+
+  .btn-theme-circle:nth-child(1){
+    &::before{
+      background-color: #FFC0CB;
+    }
+  }
+
+   .btn-theme-circle:nth-child(2){
+    &::before{
+      background-color: #ADD8E6;
+    }
+  }
+
+   .btn-theme-circle:nth-child(3){
+    &::before{
+      background-color: #98FF98;
+    }
+  }
+  
+   .btn-theme-circle:nth-child(4){
+    &::before{
+      background-color: #FAFAD2;
+    }
+  }
+  
+}
+
+.theme-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-modal {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--modal-background-color);
+  border-radius: 30px;
+  padding: 20px 30px 50px 30px;
+  box-shadow: .2px .2px 5px var(--font-color); 
+  min-width: 30%;
+  max-width: 760px;
+  min-height: 35%;
+}
+
+.theme-modal h2 {
+  color: var(--font-color);
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.theme-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+
+  &:hover {
+    opacity: .8;
+    transition: opacity .2s ease;
+  }
+}
+
+.theme-modal .options-container {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  gap: 30px;
+  flex: 1;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-modal .options-container .theme-option {
+  width: 7em;
+  height: 7em;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid #444444;
+
+  &:hover {
+    opacity: .92;
+    transform: scale(1.05);
+    transition: all .5s ease;
+  }
+  
 }
 
 .title-bar .title-bar__controls {
@@ -372,7 +471,7 @@ p, span, ul, li {
 
 .menu__sidebar {
   margin: 0 auto;
-  background:var(--cor-white);
+  background:var(--background-color);
   padding-bottom: 0.7rem;
   width: 20%;
   height: 100%;
@@ -389,10 +488,10 @@ p, span, ul, li {
   gap: 10px;
   background: transparent;
   border: 2px solid #8e8e8e;
-  color: var(--cor-black);
+  color: var(--font-color);
 
   svg {
-    color: var(--cor-black);
+    color: var(--font-color);
   }
 }
 
@@ -403,7 +502,7 @@ p, span, ul, li {
   justify-content: flex-start;
   margin-bottom: 0.9rem;
   padding: 0.7rem 1rem;
-  background-color: var(--cor-white);
+  background-color: var(--background-color);
 }
 
 .sidebar__list{
@@ -436,7 +535,7 @@ p, span, ul, li {
   border: none;
   background: transparent;
   font-size: medium;
-  color: var(--cor-black)
+  color: var(--font-color)
 }
 
 .menu__list-item button:hover {
@@ -462,7 +561,7 @@ p, span, ul, li {
   min-height: 580px;
   height: 100%;
   font-size: 12px;
-  background:var(--cor-white);
+  background:var(--background-color);
   padding: 1rem 0 0 0;
 }
 
@@ -473,26 +572,26 @@ p, span, ul, li {
   height: 85%;
   width: 95%;
   margin-bottom: 20px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
 }
 
 .calendar__top-bar {
   width: 95.1%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   border-bottom: none;
 }
 
 .top-bar__days {
   width: 100%;
   text-align: center;
-  color: lighten(var(--highlight), 20%);
+  color: lighten(var(--font-color), 20%);
   font-weight: 100;
   -webkit-font-smoothing: subpixel-antialiased;
   font-size: 1rem;
   line-height: 25px;
-  border-right: 1px solid var(--border);
+  border-right: 1px solid var(--border-color);
   border-bottom: none;
 }
 
@@ -502,7 +601,7 @@ p, span, ul, li {
 }
 
 .calendar__day {
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   position: relative;
   display: flex;
   gap: 15px;
@@ -521,7 +620,7 @@ p, span, ul, li {
 }
 
 .calendar__date {
-  color: var(--cor-black);
+  color: var(--font-color);
   font-size: 1.7rem;
   font-weight: 600;
   line-height: 0.7;
@@ -541,12 +640,12 @@ p, span, ul, li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--task-bg);
+  background-color: var(--task-count-color);
   border-radius: 50%;
   font-weight: bold;
-  border: 2px solid var(--border);
+  border: 2px solid var(--border-color);
+  color: var(--font-color);
 
-  color: black;
   display: flex;
   font-size: 0.8rem;
 
@@ -593,8 +692,8 @@ p, span, ul, li {
     width: 20%;
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid var(--border);
-    background-color: var(--blackblack);
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
 }
 
 .kanban-column-title-container {
@@ -607,7 +706,7 @@ p, span, ul, li {
 .kanban-column-title {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--cor-black);
+    color: var(--font-color);
     text-align: left;
 }
 
@@ -616,7 +715,7 @@ p, span, ul, li {
   border: none;
   cursor: pointer;
   font-size: 2em;
-  color: var(--cor-black)
+  color: var(--font-color)
 }
 
 .kanban-card {
@@ -626,7 +725,7 @@ p, span, ul, li {
     margin-bottom: 10px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    color: var(--cor-black);
+    color: var(--font-color);
     font-size: 1.2em;
 }
 
@@ -645,10 +744,10 @@ p, span, ul, li {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  background-color: var(--cor-white);
+  background-color: var(--modal-background-color);
   border-radius: 7%;
   padding: 50px 30px;
-   box-shadow: .2px .2px 5px var(--cor-black); 
+  box-shadow: .2px .2px 5px var(--font-color); 
 }
 
 .task-details__modal-container {
@@ -656,12 +755,12 @@ p, span, ul, li {
 }
 
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -683,7 +782,7 @@ p, span, ul, li {
   font-size: 16px;
   margin-bottom: 15px;
   outline: none;
-  color: var(--cor-black);
+  color: var(--font-color);
 
   &:focus {
         border: 2px solid #5f5d5d;
@@ -735,7 +834,7 @@ p, span, ul, li {
   font-size: 16px;
   outline: none;
   margin-bottom: 15px;
-  color: var(--cor-black);
+  color: var(--font-color);
 
   &:focus {
       border: 2px solid #5f5d5d;
@@ -778,7 +877,7 @@ p, span, ul, li {
   cursor: pointer;
   border: 2px solid #8d8c8c;
   background-color: transparent;
-  color: var(--cor-black);
+  color: var(--font-color);
   align-self: flex-end;
   margin-top: 5px;
   color: #555;
@@ -802,14 +901,14 @@ p, span, ul, li {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  background-color: var(--cor-white);
+  background-color: var(--modal-background-color);
   border-radius: 15px;
   padding: 20px 30px;
-  box-shadow: .2px .2px 5px var(--cor-black); 
+  box-shadow: .2px .2px 5px var(--font-color); 
 }
 
 .task-list-modal-container h2 {
-  color: var(--cor-black);
+  color: var(--font-color);
   width: 100%;
   padding: 0;
   margin: 0;
@@ -824,7 +923,7 @@ p, span, ul, li {
   background: transparent;
   font-size: 2rem;
   cursor: pointer;
-  color: var(--cor-black);
+  color: var(--font-color);
 }
 
 .task-list-modal-container button:hover {
@@ -845,7 +944,7 @@ p, span, ul, li {
 .task-item {
   padding: 15px 10px;
   font-size: 1.2rem;
-  color: var(--cor-black);
+  color: var(--font-color);
   background-color: var(--highlight);
   min-height: 70px;
   border-radius: 10px;
@@ -858,7 +957,7 @@ p, span, ul, li {
 }
 
 .task-list .task-title {
-  color: var(--cor-black);
+  color: var(--font-color);
   font-size: 1.03em;
   font-weight: 400;
   display: block;
@@ -867,7 +966,7 @@ p, span, ul, li {
 .task-list .task-deadline {
   display: block;
   margin-top: 5px;
-  color: var(--cor-black);
+  color: var(--font-color);
 }
 
 .task-list .task-priority-status-container {
@@ -901,7 +1000,7 @@ p, span, ul, li {
 .task-status-container .task-status {
   font-size: 0.8em;
   font-weight: bold;
-  color: var(--cor-black);
+  color: var(--font-color);
 }
 
 .task-priority {
@@ -956,7 +1055,7 @@ p, span, ul, li {
   cursor: pointer;
   border: 2px solid #8d8c8c;
   background-color: transparent;
-  color: var(--cor-black);
+  color: var(--font-color);
   align-self: flex-end;
   margin-top: 5px;
   color: #555;

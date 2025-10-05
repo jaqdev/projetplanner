@@ -6,7 +6,10 @@ import { getMonthToRenderTasks, getYearToRenderTasks, initializeLocalStorage } f
 import { getTasks, initializeTasksLocalStorage, loadTasksFromStorage } from './states/task-state.js';
 import { getCurrentView, loadCurrentViewFromLocalStorage } from './states/view-state.js';
 import { setupCreateTaskButton } from './task-modal-setup.js';
-import './theme.js'
+import { loadSavedTheme, setupTheme} from './theme.js'
+
+loadSavedTheme();
+setupTheme();
 
 loadCurrentViewFromLocalStorage();
 let view = getCurrentView();
