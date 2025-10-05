@@ -84,10 +84,11 @@ function changeTheme(theme){
   changeCssVarValue("--font-color", theme.fontColor);
   changeCssVarValue("--background-color", theme.backgroundColor);
   changeCssVarValue("--modal-background-color", theme.modalBackgroundColor);
-  changeCssVarValue("--border-color", theme.borderColor);
+  changeCssVarValue("--border-color", theme.primaryColor);
   changeCssVarValue("--box-shadow", theme.boxShadow);
   changeCssVarValue("--task-count-color", theme.taskCountColor);
   changeCssVarValue("--highlight", theme.highlight);
+  changeCssVarValue("--primary-color", theme.primaryColor);
 }
 
 function changeCssVarValue(varName, varValue){

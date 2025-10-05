@@ -775,7 +775,7 @@ p, span, ul, li {
   width: 350px;
   height: 45px;
   padding: 10px;
-  border: 2px solid #8d8c8c;
+  border: 2px solid var(--primary-color);
   background-color: transparent;
   border-radius: 5px;
   box-sizing: border-box;
@@ -785,8 +785,8 @@ p, span, ul, li {
   color: var(--font-color);
 
   &:focus {
-        border: 2px solid #5f5d5d;
-        transition: all .3s ease;
+    border: 2px solid var(--primary-color);
+    transition: all .3s ease;
   }
 }
 
@@ -819,6 +819,7 @@ p, span, ul, li {
   input {
     width: 20px;
     height: 20px;
+    accent-color: var(--primary-color);
   }
 }
 
@@ -827,7 +828,7 @@ p, span, ul, li {
   width: 350px;
   height: 130px;
   padding: 10px;
-  border: 2px solid #8d8c8c;
+  border: 2px solid var(--primary-color);
   background-color: transparent;
   border-radius: 5px;
   box-sizing: border-box;
@@ -837,7 +838,7 @@ p, span, ul, li {
   color: var(--font-color);
 
   &:focus {
-      border: 2px solid #5f5d5d;
+      border: 2px solid var(--primary-color);
       transition: all .3s ease;
   }
 }
@@ -857,6 +858,7 @@ p, span, ul, li {
     input {
       height: 20px;
       width: 20px;
+      accent-color: var(--primary-color);
     }
 
     label {
@@ -875,12 +877,11 @@ p, span, ul, li {
   font-size: 16px;
   border: none;
   cursor: pointer;
-  border: 2px solid #8d8c8c;
-  background-color: transparent;
+  background-color: var(--primary-color);
   color: var(--font-color);
   align-self: flex-end;
   margin-top: 5px;
-  color: #555;
+  color: white;
   font-weight: bold;
 }
 
