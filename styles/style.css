@@ -619,7 +619,9 @@ p, span, ul, li {
 
 }
 
+
 .calendar__date {
+  position: relative;
   color: var(--font-color);
   font-size: 1.7rem;
   font-weight: 600;
@@ -632,6 +634,14 @@ p, span, ul, li {
   &.inactive {
     opacity: .4;
   }
+}
+
+.calendar__day:has(> .calendar__date.today){
+  background-color: color-mix(in srgb, var(--highlight), black 10%);
+}
+
+.calendar__date.today {
+  color: var(--primary-color);
 }
 
 .calendar__task {
@@ -651,10 +661,6 @@ p, span, ul, li {
 
   @media screen and (min-width:55em) {
     font-size: 1rem;
-  }
-
-  &.calendar__task--today {
-    color: var(--cor-preto);
   }
 
    &.inactive {

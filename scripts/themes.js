@@ -13,7 +13,7 @@ export const themes = {
     "fontColor": "#1a1a1a",
     "backgroundColor": "#f9f9f9",
     "primaryColor": "#4a4a4a",
-    "highlight": "#ffffff",
+    "highlight": "#dbdbdbff",
     "taskCountColor": "transparent",
     "modalBackgroundColor": "#ffffff", // Mantido o highlight, pois já é neutro e claro
     "previewColor": "#e0e0e0"

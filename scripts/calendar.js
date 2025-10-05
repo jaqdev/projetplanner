@@ -49,7 +49,6 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
 
   console.log("Renderizando calendário para:", month, "/", year);
   
-
   tasks = formatTasksToCalendar(tasks);
 
   let calendar = generateCalander(year, month);
@@ -74,6 +73,15 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
       let dateFormatted = day.date.toLocaleDateString('en-CA');
       let calendarDate =  createElement('span', 'calendar__date', day.date.getDate());
       let calendarTask = createElement('span', 'calendar__task', tasks[dateFormatted]?.length || "0");
+
+      let current = new Date();
+      if (
+            day.date.getDate() === current.getDate() &&
+            day.date.getMonth() === current.getMonth() &&
+            day.date.getFullYear() === current.getFullYear()
+          ) {
+            calendarDate.classList.add('today');
+          }
 
       day.currentMonth == false && calendarDate.classList.add('inactive');
       day.currentMonth == false && calendarTask.classList.add('inactive');
