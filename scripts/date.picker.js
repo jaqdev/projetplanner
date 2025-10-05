@@ -43,7 +43,7 @@ export function setupDatePicker() {
         function updateYear(){
             localStorage.setItem('yearToRenderTasks', getYearToRenderTasks());
             selectedYearTitle.textContent = getYearToRenderTasks();
-            dateButton.textContent = months[getMonthToRenderTasks()] + '/' + getYearToRenderTasks;
+            dateButton.textContent = months[getMonthToRenderTasks()] + '/' + getYearToRenderTasks();
         }
 
         function updateMonth(){
