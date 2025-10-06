@@ -68,6 +68,7 @@ export function renderTaskDetailsModal(task) {
     const entireDayInput = createInputElement("checkbox", "entire-day");
     entireDayInput.id = "entire-day-input";
     entireDayInput.checked = task.entireDay || false;
+    entireDayInput.disabled = true;
     entireDayContainer.appendChild(entireDayInput);
     entireDayContainer.appendChild(entireDayLabel);
     entireDayInput.addEventListener("change", handleCheckEntireDay);
@@ -95,6 +96,7 @@ export function renderTaskDetailsModal(task) {
 
         const radioInput = createInputElement("radio", "priority", "");
         radioInput.value = priority.value;
+        radioInput.disabled = true;
         radioInput.id = `priority-${priority.value}`;
         radioInput.checked = priority.value === task.priority;
 
@@ -148,6 +150,10 @@ export function renderTaskDetailsModal(task) {
         taskTimeInput.disabled = false;
         entireDayInput.disabled = false;
         taskDateInput.disabled = false;
+        priorityContainer.childNodes.forEach(radioWrapper => {
+            radioWrapper.firstChild.disabled = false;
+        });
+        
     }
 
     function handleFormSubmit(event){

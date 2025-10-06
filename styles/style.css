@@ -796,9 +796,20 @@ main {
   gap: 10px;
 
   input {
+    position: relative;
     width: 20px;
     height: 20px;
     accent-color: var(--primary-color);
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:disabled:checked {
+      accent-color: var(--primary-color);
+      opacity: 1;
+    } 
+
   }
 }
 
@@ -837,7 +848,23 @@ main {
     input {
       height: 20px;
       width: 20px;
-      accent-color: var(--primary-color);
+      position: relative;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+      
+      &:disabled:checked::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: var(--primary-color);
+        border-radius: 50%;
+      }
     }
 
     label {
