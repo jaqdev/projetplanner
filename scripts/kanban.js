@@ -21,7 +21,7 @@ export function renderKanban(tasks = []) {
     let completedTasks = tasks['completed'] || [];
 
     // Seleciona o container principal onde o Kanban será renderizado
-    const mainContainer = document.querySelector('.main__container');
+    const mainContainer = document.querySelector('.view-content');
 
     // Limpa o conteúdo existente para renderizar o Kanban
     mainContainer.innerHTML = '';

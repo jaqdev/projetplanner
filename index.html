@@ -13,50 +13,65 @@
 </head>
 
 <body>
-    <main class="calendar-contain">
-
-  <section class="title-bar">
-    <div class="tittle-bar__left-wrapper">
-      <button class="title-bar__burger">
-      <span class="burger__lines">Toggle Menu</span>
-      </button>
-      <span class="title-bar__company">
-        Plano de Estudos
-      </span>
-    </div>
-
-    <div class="tittle-bar__right-wrapper">
-      <div class="title-bar__date-controls">
-        <button class="title-bar__month">
-          Mês/ano
-        </button>
-        <div class="title-bar__date-picker">
-          <div class="title-bar__year-container">
-            <button class="title_bar__prev-year"><</button>
-            <span id="title_bar__selected-year">2025</span>
-            <button class="title_bar__next-year">></button>
-          </div>
-          <div class="title-bar__month-container">
-            <button class="title-bar__month-option" data-month="0">Jan</button>
-            <button class="title-bar__month-option" data-month="1">Fev</button>
-            <button class="title-bar__month-option" data-month="2">Mar</button>
-            <button class="title-bar__month-option" data-month="3">Abr</button>
-            <button class="title-bar__month-option" data-month="4">Maio</button>
-            <button class="title-bar__month-option" data-month="5">Jun</button>
-            <button class="title-bar__month-option" data-month="6">Jul</button>
-            <button class="title-bar__month-option" data-month="7">Ago</button>
-            <button class="title-bar__month-option" data-month="8">Set</button>
-            <button class="title-bar__month-option" data-month="9">Out</button>
-            <button class="title-bar__month-option" data-month="10">Nov</button>
-            <button class="title-bar__month-option" data-month="11">Dez</button>
-          </div>
+  <main>
+    <aside class="menu__sidebar">
+        <div class="menu__header">
+          <button class="burger-menu">
+            <span class="burger__lines">Toggle Menu</span>
+          </button>
+          <span class="title-bar__company">
+          Plano de Estudos
+          </span>
         </div>
-      </div>
-        <div class="title-bar__controls">
-          <div class="title-bar__minimize"></div>
-          <div class="title-bar__maximize"></div>
-          <div class="title-bar__close"></div>
-        </div>
+
+        <nav class="menu__nav">
+          <button id="create-task-button" type="button">
+            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Criar Tarefa</span>
+          </button>
+
+          <ul class="sidebar__list">
+            <li class="menu__list-item">
+              <img src="./assets/icons/calendar-dark.png" alt="Icone de calendário" id="calendar-icon">
+              <button class="menu__button" data-option="calendar">Calendario</button></li>
+            <li class="menu__list-item">
+              <img src="./assets/icons/kanban-dark.png" alt="Icone de kanban" id="kanban-icon">
+              <button class="menu__button" data-option="kanban">Kanban</button></li>
+          </ul>
+        </nav>
+    </aside>
+
+    <section class="view__container">
+      <div class="view__container__header">
+        <div class="date-controls">
+          <button class="selected-date">
+            Mês/ano
+          </button>
+          <div class="date-picker">
+            <div class="date-picker-year-container">
+              <button class="tdate-picker-prev-year"><</button>
+              <span id="date-picker-selected-year">2025</span>
+              <button class="date-picker-next-year">></button>
+            </div>  <!-- date-picker-year-container -->
+            <div class="date-picker-month-container">
+              <button class="date-picker-month-option" data-month="0">Jan</button>
+              <button class="date-picker-month-option" data-month="1">Fev</button>
+              <button class="date-picker-month-option" data-month="2">Mar</button>
+              <button class="date-picker-month-option" data-month="3">Abr</button>
+              <button class="date-picker-month-option" data-month="4">Maio</button>
+              <button class="date-picker-month-option" data-month="5">Jun</button>
+              <button class="date-picker-month-option" data-month="6">Jul</button>
+              <button class="date-picker-month-option" data-month="7">Ago</button>
+              <button class="date-picker-month-option" data-month="8">Set</button>
+              <button class="date-picker-month-option" data-month="9">Out</button>
+              <button class="date-picker-month-option" data-month="10">Nov</button>
+              <button class="date-picker-month-option" data-month="11">Dez</button>
+            </div> <!-- date-picker-month-container -->
+          </div> <!-- date-picker -->
+        </div> <!-- date-controls -->
         
         <!-- Botão de alternar tema -->
         <div class="btn-theme-container">
@@ -64,41 +79,12 @@
           <div class="btn-theme-circle"></div>
           <div class="btn-theme-circle"></div>
           <div class="btn-theme-circle"></div>
-        </div>
-        </div>
-      </div>
-      </div>
+        </div> <!-- btn-theme-container -->
+      </div> <!-- view__container__header -->
       
-</section>
-
-<div class="wrapper">
-    <aside class="menu__sidebar">
-
-    <button id="create-task-button" type="button">
-      <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 5L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>Criar Tarefa</span>
-    </button>
-
-    <nav class="menu__nav">
-      <ul class="sidebar__list">
-        <li class="menu__list-item">
-          <img src="./assets/icons/calendar-dark.png" alt="Icone de calendário" id="calendar-icon">
-          <button class="menu__button" data-option="calendar">Calendario</button></li>
-        <li class="menu__list-item">
-          <img src="./assets/icons/kanban-dark.png" alt="Icone de kanban" id="kanban-icon">
-          <button class="menu__button" data-option="kanban">Kanban</button></li>
-      </ul>
-    </nav>
-  </aside>
-
-  
-  <section class="main__container">
-    
-  </section>
-</div>
+      <!-- Renderiza o conteudo dinamicamente. -->
+      <section class="view-content"></section>
+    </section>
 
 </main>
 

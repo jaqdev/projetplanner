@@ -21,7 +21,10 @@ p, span, ul, li {
   font-size: 1rem;
 }
 
-.calendar-contain {
+main {
+  display: flex;
+  align-items: center;
+  justify-content: start;
   left: 0;
   right: 0;
   border-radius: 0;
@@ -38,47 +41,16 @@ p, span, ul, li {
   }
 }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  width: 100%;
-  height: 100%;
-}
-
-.title-bar {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+.menu__sidebar {
   background:var(--background-color);
-  padding: 0.5rem 0 0 0 ;
-  margin-bottom: 0;
+  padding-bottom: 0.7rem;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 0 0;
 }
 
-.title-bar__burger {
-  display: block;
-  position: relative;
-  float: left;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  width: 38px;
-  height: 30px;
-  font-size: 0;
-  text-indent: -9999px;
-  appearance: none;
-  box-shadow: none;
-  border-radius: none;
-  border: none;
-  cursor: pointer;
-  background:none;
-
-  &:focus {
-    outline: none;
-  }
-}
 
 .burger__lines {
   display: block;
@@ -111,55 +83,127 @@ p, span, ul, li {
   }
 }
 
-.title-bar__company {
-  font-size: 1rem;
-  line-height: 30px;
-}
-
-.tittle-bar__left-wrapper {
-  display: flex;
-  width: 20%;
-}
-
-.tittle-bar__right-wrapper {
-  position: relative;
-  width: 76.2%;
+.menu__sidebar #create-task-button {
+  width: 75%;
+  height: 45px;
+  margin:10px 12.5%;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  border: 2px solid #8e8e8e;
+  color: var(--font-color);
+
+  svg {
+    color: var(--font-color);
+  }
 }
 
-.title-bar__date-controls {
+.menu__nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 0.9rem;
+  padding: 0.7rem 1rem;
+  background-color: var(--background-color);
+}
+
+.sidebar__list{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.menu__list-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-right: 23px;
+  padding: 0 10px;
+  opacity: 0.8;
+}
+
+.menu__list-item:hover {
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.menu__list-item button {
+  border: none;
+  background: transparent;
+  font-size: medium;
+  color: var(--font-color)
+}
+
+.menu__list-item button:hover {
+  cursor: pointer;
+}
+
+.menu__list-item img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.view__container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-height: 580px;
+  height: 100%;
+  font-size: 12px;
+  background: var(--background-color);
+}
+
+.view__container__header {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background:var(--background-color);
+  padding: 15px 70px 0 0;
+  margin-bottom: 0;
+}
+
+.date-controls {
+  width: auto;
+  height: 30px;
   justify-self: flex-start;
-  position: absolute;
-  left: 0;
-  margin-left: 1px;
 
   button {
     color: var(--font-color);
   }
     
 
-  .title-bar__month{
+  .selected-date{
     padding: 0 30px 0 10px;
     width: 100%;
   }
 
-  .title-bar__date-picker{
+  .date-picker{
     z-index: 1000;
     display: none;
     position: absolute;
-    top: calc(100% + 10px);
-    padding: 15px;
-    width: 250%;
+    top: 50px;
+    width: 15%;
     flex-flow: column;
     gap: 15px;
+    padding-bottom: 10px;
     
     background-color: var(--background-color);
 
     box-shadow: #000000 0px 1px 5px;
 
-    .title-bar__year-container {
+    .date-picker-year-container {
       display: flex;
       align-self: center;
       justify-content: center;
@@ -187,8 +231,8 @@ p, span, ul, li {
       }
 
     }
-  
-    .title-bar__month-container{
+
+    .date-picker-month-container{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 5px;
@@ -212,13 +256,36 @@ p, span, ul, li {
 
   }
 
-  .title-bar__date-picker.visible {
+  .date-picker.visible {
     display: flex;
   }
 
 }
 
-.title-bar__month {
+.burger-menu {
+  display: block;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 38px;
+  height: 30px;
+  font-size: 0;
+  text-indent: -9999px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  border: none;
+  cursor: pointer;
+  background:none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.selected-date {
   position: relative;
   float: left;
   font-size: 1rem;
@@ -254,32 +321,6 @@ p, span, ul, li {
     border-right: 1px solid rgb(0, 0, 0);
     transform: rotate(135deg);
   }
-}
-
-.title-bar__minimize,
-.title-bar__maximize,
-.title-bar__close {
-  position: relative;
-  float: left;
-  width: 34px;
-  height: 34px;
-
-  &:before,
-  &:after {
-    top: 30%;
-    right: 30%;
-    bottom: 30%;
-    left: 30%;
-    content: " ";
-    position: absolute;
-    border-color: #8e8e8e;
-    border-style: solid;
-    border-width: 0 0 2px 0;
-  }
-}
-
-.title-bar__controls{
-  right: 50px;
 }
 
 .btn-theme-container {
@@ -417,136 +458,11 @@ p, span, ul, li {
   
 }
 
-.title-bar .title-bar__controls {
-  display: inline-block;
-  vertical-align: top;
-  width: auto;
-  align-self: flex-end;
-
-  &:before,
-  &:after {
-    content: none;
-  }
-}
-
-.title-bar .title-bar__minimize {
-  &:before {
-    border-bottom-width: 2px;
-  }
-}
-
-.title-bar .title-bar__maximize {
-  &:before {
-    border-width: 1px 1px 2px 1px;
-  }
-}
-
-.title-bar .title-bar__close:before,
-.title-bar .title-bar__close:after {
-  bottom: 50%;
-  top: 49.9%;
-}
-
-.title-bar .title-bar__close:before {
-  transform: rotate(45deg);
-}
-
-.title-bar .title-bar__close:after {
-  transform: rotate(-45deg);
-}
-
-.title-bar .title-bar__close:hover {
-  background-color: #747272;
-}
-
-.title-bar div:hover:after,
-.title-bar div:hover:before {
-  border-color: #333333;
-}
-
-.title-bar .title-bar__close:hover:after,
-.title-bar .title-bar__close:hover:before {
-  border-color: #FFFFFF;
-}
-
-.menu__sidebar {
-  margin: 0 auto;
-  background:var(--background-color);
-  padding-bottom: 0.7rem;
-  width: 20%;
-  height: 100%;
-}
-
-.menu__sidebar #create-task-button {
-  width: 75%;
-  height: 45px;
-  margin:10px 12.5%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: transparent;
-  border: 2px solid #8e8e8e;
-  color: var(--font-color);
-
-  svg {
-    color: var(--font-color);
-  }
-}
-
-.menu__nav {
-  display: flex;
-  align-items: start;
-  height: 100%;
-  justify-content: flex-start;
-  margin-bottom: 0.9rem;
-  padding: 0.7rem 1rem;
-  background-color: var(--background-color);
-}
-
-.sidebar__list{
+.view-content {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  list-style: none;
-  margin: 0;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.menu__list-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  margin-right: 23px;
-  padding: 0 10px;
-  opacity: 0.8;
-}
-
-.menu__list-item:hover {
-  opacity: .5;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-.menu__list-item button {
-  border: none;
-  background: transparent;
-  font-size: medium;
-  color: var(--font-color)
-}
-
-.menu__list-item button:hover {
-  cursor: pointer;
-}
-
-.menu__list-item img {
-  width: 18px;
-  height: 18px;
-  margin-right: 8px;
-  vertical-align: middle;
+  flex:1;
+  padding: 20px 70px 70px 0;
 }
 
 .calendar__heading-highlight {
@@ -554,33 +470,19 @@ p, span, ul, li {
   font-weight: 900;
 }
 
-.main__container {
-  flex-flow: column wrap;
-  display: flex;
-  width: 80%;
-  min-height: 580px;
-  height: 100%;
-  font-size: 12px;
-  background:var(--background-color);
-  padding: 1rem 0 0 0;
-}
-
-.real-calendar-container{
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  border-radius: 5px;
-  height: 85%;
-  width: 95%;
-  margin-bottom: 20px;
-  border: 1px solid var(--border-color);
-}
-
 .calendar__top-bar {
-  width: 95.1%;
+  width: 100%;
+  height: 30px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   border: 1px solid var(--border-color);
   border-bottom: none;
+}
+
+.calendar-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .top-bar__days {
@@ -619,7 +521,6 @@ p, span, ul, li {
 
 }
 
-
 .calendar__date {
   position: relative;
   color: var(--font-color);
@@ -632,7 +533,7 @@ p, span, ul, li {
   }
 
   &.inactive {
-    opacity: .4;
+    opacity: .6;
   }
 }
 

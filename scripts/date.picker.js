@@ -3,9 +3,9 @@ import { getMonthToRenderTasks, getYearToRenderTasks, setMonthToRenderTasks, set
 import { getTasks } from "./states/task-state.js";
 
 export function setupDatePicker() {
-        const dateButton = document.querySelector('.title-bar__month');
-        const datePickerContainer = document.querySelector('.title-bar__date-picker');
-        const selectedYearTitle = document.getElementById('title_bar__selected-year');
+        const dateButton = document.querySelector('.selected-date');
+        const datePickerContainer = document.querySelector('.date-picker');
+        const selectedYearTitle = document.getElementById('date-picker-selected-year');
 
         dateButton.textContent = months[getMonthToRenderTasks()] + '/' + getYearToRenderTasks();
         selectedYearTitle.textContent = getYearToRenderTasks();
@@ -16,8 +16,8 @@ export function setupDatePicker() {
         });
 
         // Buttons to change year
-        const prevYearButton = document.querySelector('.title_bar__prev-year');
-        const nextYearButton = document.querySelector('.title_bar__next-year');
+        const prevYearButton = document.querySelector('.tdate-picker-prev-year');
+        const nextYearButton = document.querySelector('.date-picker-next-year');
 
         // Event listeners to change year 
         prevYearButton.addEventListener('click', () => {
@@ -30,7 +30,7 @@ export function setupDatePicker() {
             updateYear();
         });
 
-        let monthsButtosns = document.querySelectorAll('.title-bar__month-option');
+        let monthsButtosns = document.querySelectorAll('.date-picker-month-option');
 
         // Add event listeners to change month
         monthsButtosns.forEach(btn => {

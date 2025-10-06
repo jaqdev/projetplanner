@@ -59,11 +59,11 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
 
   console.log("Renderizando calendário para:", firstDate.toLocaleDateString('en-CA'), "até", lastDate.toLocaleDateString('en-CA'));
 
-  const mainContainer = document.querySelector('.main__container');
+  const viewContent = document.querySelector('.view-content');
   const calendarContainer = document.createElement('div');
-  calendarContainer.classList.add('real-calendar-container');
+  calendarContainer.classList.add('calendar-container');
 
-  mainContainer.innerHTML = "";
+  viewContent.innerHTML = "";
 
   renderCalendarTopBar();
 
@@ -95,7 +95,7 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
       calendarContainer.appendChild(dayCell);
     });
 
-    mainContainer.appendChild(calendarContainer);
+    viewContent.appendChild(calendarContainer);
 
   console.log("Calendário renderizado com sucesso.");
 }
@@ -107,7 +107,7 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
 function renderCalendarTopBar() {
   let weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
-  let mainContainer = document.querySelector('.main__container');
+  let viewContent = document.querySelector('.view-content');
 
   let topBar = createElement('section', 'calendar__top-bar');
 
@@ -116,5 +116,5 @@ function renderCalendarTopBar() {
     topBar.appendChild(dayElement);
   });
 
-  mainContainer.appendChild(topBar);
+  viewContent.appendChild(topBar);
 }
