@@ -5,6 +5,8 @@ import { getTasks } from "./states/task-state.js";
 import { setCurrentView } from "./states/view-state.js";
 
 export function setupMenu(){
+  toggleMenuSize();
+
   let buttons = document.querySelectorAll('.menu__button');
   
   // Add event listeners to menu buttons to switch views
@@ -21,4 +23,15 @@ export function setupMenu(){
       }
     });
   });
+}
+
+export function toggleMenuSize(){
+  let burgerButton = document.querySelector('.burger-menu');
+  
+  burgerButton.addEventListener("click", () => {
+
+    const menuSidebar = document.querySelector(".menu__sidebar");
+    menuSidebar.classList.toggle("minimized");
+  });
+  
 }

@@ -1,3 +1,7 @@
+:root {
+  --company-name-width: auto;
+}
+
 html, body {
   font-size: 100%;
   width: 100vw;
@@ -43,12 +47,59 @@ main {
 
 .menu__sidebar {
   background:var(--background-color);
-  padding-bottom: 0.7rem;
   width: 20%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 15px 0 0 0;
+  padding: 15px 0 .7rem 0;
+  transition: width .5s ease;
+}
+
+.menu__sidebar.minimized {
+  overflow: hidden;
+  width: 7%;
+  min-width: 120px;
+  --company-name-width: 0px;
+}
+
+.menu__sidebar.minimized~ .view__container {
+  width: 93%;
+}
+
+
+.menu__sidebar.minimized > .menu_container > .menu__nav > #create-task-button {
+  border: none;
+
+  svg {
+    transform: scale(1.2);
+  }
+
+  span {
+    display: none;
+  }
+
+}
+
+.menu__sidebar.minimized > .menu_container > .menu__nav > .sidebar__list {
+  padding-left: 0;
+  padding-right: 0;
+  align-items: center;
+}
+
+.menu__sidebar.minimized > .menu_container > .menu__nav > .sidebar__list > .menu__list-item {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  transition: all .5 ease;
+
+  img {
+    transform: scale(1.2);
+  }
+
+  button {
+    display: none;
+  }
+
 }
 
 
@@ -83,6 +134,14 @@ main {
   }
 }
 
+.menu__header {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-left: 30px;
+}
+
 .menu__sidebar #create-task-button {
   width: 75%;
   height: 45px;
@@ -101,13 +160,19 @@ main {
   }
 }
 
+.menu_container {
+  height: 100%;
+  padding: 25px 30px 90px 30px;
+}
+
 .menu__nav {
   display: flex;
+  flex: 1;
   flex-direction: column;
   height: 100%;
-  margin-bottom: 0.9rem;
-  padding: 0.7rem 1rem;
-  background-color: var(--background-color);
+  background-color: var(--highlight);
+  border-radius: 20px;
+  padding-top: 15px;
 }
 
 .sidebar__list{
@@ -162,6 +227,7 @@ main {
   height: 100%;
   font-size: 12px;
   background: var(--background-color);
+  transition: width .5s ease;
 }
 
 .view__container__header {
@@ -283,6 +349,11 @@ main {
   &:focus {
     outline: none;
   }
+}
+
+.title-bar__company {
+  width:  var(--company-name-width);
+  overflow: hidden;
 }
 
 .selected-date {
@@ -585,7 +656,7 @@ main {
     width: 100%;
     min-height: 580px;
     padding: 50px 0;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .kanban-column {
