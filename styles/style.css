@@ -537,6 +537,10 @@ main {
   padding: 20px 70px 0 0;
 }
 
+.view-content:not(:has(.kanban-board)){
+  padding-bottom: 70px;
+}
+
 .view-content:has(.kanban-board){
   overflow: auto;
   scrollbar-color: inherit;
