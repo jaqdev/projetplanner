@@ -69,7 +69,11 @@ main {
 
 
 .menu__sidebar.minimized > .menu_container > .menu__nav > #create-task-button {
-  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
 
   svg {
     transform: scale(1.2);
@@ -151,12 +155,13 @@ main {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: transparent;
-  border: 2px solid #8e8e8e;
-  color: var(--font-color);
+  background: var(--primary-color);
+  border: none;
+  color: wheat;
+  border-radius: 5px;
 
   svg {
-    color: var(--font-color);
+    color: wheat;
   }
 }
 
