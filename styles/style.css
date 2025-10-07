@@ -11,6 +11,7 @@ html, body {
   margin: 0;
   overflow: hidden;
   background-color: var(--background-color);
+  scrollbar-color: var(--primary-color) var(--background-color);
   color: var(--font-color);
 }
 
@@ -534,9 +535,14 @@ main {
   flex-direction: column;
   flex:1;
   padding: 20px 70px 0 0;
-  overflow: auto;
-  scrollbar-color: var(--primary-color) var(--background-color);
 }
+
+.view-content:has(.kanban-board){
+  overflow: auto;
+  scrollbar-color: inherit;
+}
+
+
 
 .calendar__heading-highlight {
   color: #2d444a;
