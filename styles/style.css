@@ -97,12 +97,11 @@ main {
     transform: scale(1.2);
   }
 
-  button {
+  span {
     display: none;
   }
 
 }
-
 
 .burger__lines {
   display: block;
@@ -203,10 +202,13 @@ main {
 }
 
 .menu__list-item button {
+  width: 100%;
+  text-align: left;
+  padding: 10px 0;
   border: none;
   background: transparent;
   font-size: medium;
-  color: var(--font-color)
+  color: var(--font-color);
 }
 
 .menu__list-item button:hover {
@@ -214,6 +216,13 @@ main {
 }
 
 .menu__list-item img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.menu__list-item span {
   width: 18px;
   height: 18px;
   margin-right: 8px;
