@@ -873,6 +873,7 @@ main {
       height: 20px;
       width: 20px;
       position: relative;
+      accent-color: var(--primary-color);
 
       &:disabled {
         cursor: not-allowed;
