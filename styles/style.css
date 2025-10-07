@@ -347,7 +347,11 @@ main {
   display: initial;
 }
 
-.view__container__header:not(:has(.date-control.visible)){
+.view__container__header:has(.date-controls.visible){
+  justify-content: space-between;
+}
+
+.view__container__header:not(:has(.date-controls.visible)){
   justify-content: end;
 }
 
