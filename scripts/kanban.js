@@ -1,3 +1,4 @@
+import { hideDateControls } from './calendar.js';
 import { createTaskCard } from './create-card.js';
 import { findTaskById, saveTasksToStorage, updateTask } from './states/task-state.js';
 import { renderCreateTaskModal } from './task-modal-setup.js';
@@ -13,6 +14,9 @@ import {createElement, formatTasksToKanban} from './utils.js'
  *   }
  */
 export function renderKanban(tasks = []) {
+
+    hideDateControls();
+
     // Formata as tarefas para o layout Kanban
     tasks = formatTasksToKanban(tasks);
 

@@ -259,11 +259,11 @@ main {
   width: auto;
   height: 30px;
   justify-self: flex-start;
+  display: none;
 
   button {
     color: var(--font-color);
   }
-    
 
   .selected-date{
     padding: 0 30px 0 10px;
@@ -341,6 +341,14 @@ main {
     display: flex;
   }
 
+}
+
+.date-controls.visible {
+  display: initial;
+}
+
+.view__container__header:not(:has(.date-control.visible)){
+  justify-content: end;
 }
 
 .burger-menu {

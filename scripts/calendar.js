@@ -48,6 +48,8 @@ export function generateCalander(year, month) {
 export async function renderCalendar(tasks = [], year = new Date().getFullYear(), month = new Date().getMonth()) {
 
   console.log("Renderizando calendário para:", month, "/", year);
+
+  displaytDateControls();
   
   tasks = formatTasksToCalendar(tasks);
 
@@ -100,6 +102,13 @@ export async function renderCalendar(tasks = [], year = new Date().getFullYear()
   console.log("Calendário renderizado com sucesso.");
 }
 
+export function displaytDateControls(){
+  document.querySelector(".date-controls").classList.add('visible');
+}
+
+export function hideDateControls(){
+  document.querySelector(".date-controls").classList.remove('visible');
+}
 
 /**
  * Renderiza a barra superior do calendário mostrando os dias da semana.
