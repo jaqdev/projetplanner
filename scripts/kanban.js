@@ -151,23 +151,27 @@ function handleCreateColumnButtonClick(event){
 
     event.target.classList.add("hidden");
 
+    let formContainer = createElement("form", "create-column-container");
+    formContainer.onsubmit = handleCreateColumn;
+
     let columnNameInput = createInputElement("text", "column-name", "Nome da coluna");
     columnNameInput.required = true;
     columnNameInput.minLength = 3;
 
-
     let saveButton = createElement("button", "save-column-button", "Criar coluna");
     let closeButton = createElement("button", "close-craete-column-container", "X")
 
+    closeButton.addEventListener("click", () => {
+        event.target.classList.remove("hidden");
+        formContainer.remove();
+    });
+    
     let actionButtonsContainer = createElement("div", "action-buttons-container");
     actionButtonsContainer.append(
         saveButton,
         closeButton
     );
-
-    let formContainer = createElement("form", "create-column-container");
-    formContainer.onsubmit = handleCreateColumn;
-
+    
     formContainer.append(
         columnNameInput,
         actionButtonsContainer,
@@ -176,6 +180,7 @@ function handleCreateColumnButtonClick(event){
     let kanbanBoard = document.querySelector(".kanban-board");
     kanbanBoard.appendChild(formContainer);
 }
+
 
 function handleCreateColumn(event){
     event.preventDefault();
