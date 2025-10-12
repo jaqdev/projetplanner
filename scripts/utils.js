@@ -50,9 +50,6 @@ export function formatTasksToCalendar(tasks = []) {
 export function formatTasksToKanban(tasks = []) {
     if (tasks.length === 0) return {};
 
-    console.log(tasks);
-    
-
     return tasks.reduce((acc, task) => {
         let { id, date, title, time, priority, description, status, entireDay} = task;
 

@@ -19,7 +19,7 @@ export function setYearToRenderTasks(year) {
     localStorage.setItem('yearToRenderTasks', year);
 }
 
-export function initializeLocalStorage() {
+export function initializeCalendarDateLocalStorage() {
     if (!localStorage.getItem('monthToRenderTasks')) {
         localStorage.setItem('monthToRenderTasks', new Date().getMonth());
     }

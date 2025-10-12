@@ -40,7 +40,7 @@ export function createTaskCard(task, date, isForKanban = false){
         // Adiciona o status da tarefa
         let status = document.createElement('span');
         status.classList.add('task-status');
-        status.textContent = `Status: ${statuses[task.status.toLowerCase()]}`;
+        status.textContent = `Status: ${statuses[task.status.toLowerCase()] ?? task.status.toLowerCase()}`;
 
         // Adiciona os elementos ao container de status
         statusContainer.appendChild(statusIcon);

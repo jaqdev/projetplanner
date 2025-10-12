@@ -1,8 +1,10 @@
 import { hideDateControls } from './calendar.js';
 import { createTaskCard } from './create-card.js';
-import { findTaskById, saveTasksToStorage, updateTask } from './states/task-state.js';
-import { renderCreateTaskModal } from './task-modal-setup.js';
+import { findTaskById, getTasks, saveTasksToStorage, updateTask } from './states/task-state.js';
+import { createInputElement, renderCreateTaskModal } from './task-modal-setup.js';
 import {createElement, formatTasksToKanban} from './utils.js'
+
+const titles =  {"todo": "A fazer", "progress": "Em progresso", "completed": "Concluído"};
 
 /**
  * Renderiza um quadro Kanban com base nas tarefas fornecidas.
@@ -20,9 +22,15 @@ export function renderKanban(tasks = []) {
     // Formata as tarefas para o layout Kanban
     tasks = formatTasksToKanban(tasks);
 
-    let todoTasks = tasks['todo'] || [];
-    let inProgressTasks = tasks['progress'] || [];
-    let completedTasks = tasks['completed'] || [];
+    // Busca as colunas salvas
+    let columns = JSON.parse(localStorage.getItem("kanban-columns"));
+
+    // Adiciona um array vazio a coluna caso nao tenha nenhuma tarefa
+    columns.forEach(column => {
+        if(!tasks[column]){
+            tasks[column] = [];
+        }
+    });
 
     // Seleciona o container principal onde o Kanban será renderizado
     const mainContainer = document.querySelector('.view-content');
@@ -33,97 +41,53 @@ export function renderKanban(tasks = []) {
     // Cria o container principal do Kanban
     const kanbanBoard = createElement('div', 'kanban-board');
   
-    // Cria as colunas do Kanban
-    const todoColumn = createElement('ul', 'kanban-column');
-    const inProgressColumn = createElement('ul', 'kanban-column');
-    const completedColumn = createElement('ul', 'kanban-column');
+    Object.keys(tasks).forEach((status) => {
+        // Cria as colunas do Kanban
+        const column = createElement('ul', 'kanban-column');
 
-    // Adiciona classes específicas para estilização das listas de tarefas
-    todoColumn.classList.add('task-list');
-    inProgressColumn.classList.add('task-list');
-    completedColumn.classList.add('task-list');
+        // Adiciona classes específicas para estilização das listas de tarefas
+        column.classList.add('task-list');
 
-    // Cria o container do titulo do Kanban
-    const todoTitleContainer = createElement('div', 'kanban-column-title-container');
-    const inProgressTitleContainer = createElement('div', 'kanban-column-title-container');
-    const completedTitleContainer = createElement('div', 'kanban-column-title-container');
+        // Cria o container do titulo do Kanban
+        const titleContainer = createElement('div', 'kanban-column-title-container');
 
-    // Cria os títulos das colunas
-    const todoTitle = createElement('span', 'kanban-column-title', 'A Fazer: ' + todoTasks.length);
-    const inProgressTitle = createElement('span', 'kanban-column-title', 'Em Progresso: ' + inProgressTasks.length);
-    const completedTitle = createElement('span', 'kanban-column-title', 'Concluído: ' + completedTasks.length);
+        // Cria os títulos das colunas
+        const title = createElement('span', 'kanban-column-title', titles[status] ?? status + ": " + tasks[status].length);
 
-    // Adiciona os títulos aos containers
-    todoTitleContainer.appendChild(todoTitle);
-    inProgressTitleContainer.appendChild(inProgressTitle);
-    completedTitleContainer.appendChild(completedTitle);
+        // Adiciona os títulos aos containers
+        titleContainer.appendChild(title);
 
-    // Cria os botões para adicionar novas tarefas
-    const addTodoTaskButton = createElement('button', 'add-task-button', '+');
-    addTodoTaskButton.addEventListener('click', () => {
-        renderCreateTaskModal();
+        // Cria os botões para adicionar novas tarefas
+        const addTaskButton = createElement('button', 'add-task-button', '+');
+        addTaskButton.addEventListener('click', () => {
+            renderCreateTaskModal();
+        });
+
+        // Adiciona os botões de criar tarefas aos containers de título
+        titleContainer.appendChild(addTaskButton);
+
+        // Adiciona os containers de título às colunas
+        column.appendChild(titleContainer);
+
+        column.addEventListener('dragover', handleDragOver);
+
+        column.addEventListener('drop', (e) => {
+            handleDrop(e, status, column);
+        });
+
+        tasks[status].forEach((task) => {
+            let kanbanTaskCard = createTaskCard(task, task.date, true);
+            kanbanTaskCard = addKanbanCardDefaultBehavior(kanbanTaskCard, task.id);
+            column.appendChild(kanbanTaskCard);
+        });
+
+        kanbanBoard.appendChild(column);
     });
 
-    // Cria os botões para adicionar novas tarefas
-    const addInProggressTaskButton = createElement('button', 'add-task-button', '+');
-    addInProggressTaskButton.addEventListener('click', () => {
-        renderCreateTaskModal();
-    });
+    let createColumnbutton = createElement("button", "create-column-button", "Criar coluna");
+    createColumnbutton.addEventListener("click", (e) => handleCreateColumnButtonClick(e));
 
-    // Cria os botões para adicionar novas tarefas
-    const addCompletedTaskButton = createElement('button', 'add-task-button', '+');
-    addCompletedTaskButton.addEventListener('click', () => {
-        renderCreateTaskModal();
-    });
-
-    // Adiciona os botões de criar tarefas aos containers de título
-    todoTitleContainer.appendChild(addTodoTaskButton);
-    inProgressTitleContainer.appendChild(addInProggressTaskButton);
-    completedTitleContainer.appendChild(addCompletedTaskButton);
-
-    // Adiciona os containers de título às colunas
-    todoColumn.appendChild(todoTitleContainer);
-    inProgressColumn.appendChild(inProgressTitleContainer);
-    completedColumn.appendChild(completedTitleContainer);
-
-    todoColumn.addEventListener('dragover', handleDragOver);
-    inProgressColumn.addEventListener('dragover', handleDragOver);
-    completedColumn.addEventListener('dragover', handleDragOver);
-
-    todoColumn.addEventListener('drop', (e) => {
-        handleDrop(e, 'todo');
-    });
-
-    inProgressColumn.addEventListener('drop', (e) => {
-        handleDrop(e, 'progress');
-    });
-
-    completedColumn.addEventListener('drop', (e) => {
-        handleDrop(e, 'completed');
-    });
-
-    todoTasks.forEach(task => {
-        let taskCard = createTaskCard(task, task.date, true);
-        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
-        todoColumn.appendChild(taskCard);
-    });
-
-    inProgressTasks.forEach(task => {
-        let taskCard = createTaskCard(task, task.date, true);
-        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
-        inProgressColumn.appendChild(taskCard);
-    });
-    
-    completedTasks.forEach(task => {
-        let taskCard = createTaskCard(task, task.date, true);
-        taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
-        completedColumn.appendChild(taskCard);
-    }); 
-
-    // Adiciona as colunas ao quadro Kanban
-    kanbanBoard.appendChild(todoColumn);
-    kanbanBoard.appendChild(inProgressColumn);
-    kanbanBoard.appendChild(completedColumn);
+    kanbanBoard.appendChild(createColumnbutton);
 
     // Renderiza o Kanban no container principal
     mainContainer.appendChild(kanbanBoard);
@@ -143,25 +107,21 @@ export function renderKanban(tasks = []) {
         event.dataTransfer.dropEffect = 'move';
     }  
 
-    function handleDrop(event, column){
+    function handleDrop(event, status, column){
         event.preventDefault();
         const taskId = event.dataTransfer.getData('text/plain');
         let task = findTaskById(taskId);
-        task.status = column;
-        changeTaskStatus(taskId, column);
+        console.log(task);
+        
+        task.status = status;
+        changeTaskStatus(taskId, status);
         
         document.getElementById(taskId).remove();
         
         let taskCard = createTaskCard(task, task.date, true);
         taskCard = addKanbanCardDefaultBehavior(taskCard, task.id);
 
-        let targetColumn;
-
-        if(column === 'todo') targetColumn = todoColumn;
-        if(column === 'completed') targetColumn = completedColumn;
-        if(column === 'progress') targetColumn = inProgressColumn;
-        
-        targetColumn.appendChild(taskCard);
+        column.appendChild(taskCard);
         
         updateColumnTitles();
         event.dataTransfer.clearData();
@@ -180,9 +140,54 @@ export function renderKanban(tasks = []) {
     }
 
     function updateColumnTitles(){
-        todoTitle.textContent = 'A Fazer: '.concat(todoColumn.childElementCount - 1);
-        inProgressTitle.textContent = 'Em Progresso: '.concat(inProgressColumn.childElementCount - 1);
-        completedTitle.textContent = 'Concluído: '.concat(completedColumn.childElementCount - 1);
+        document.querySelectorAll(".task-list").forEach(taskList => {
+            let taskCount = taskList.childElementCount - 1;
+            taskList.firstChild.firstChild.textContent = taskList.firstChild.firstChild.textContent.split(":")[0] + ": " + taskCount;
+        });
     }
 }
 
+function handleCreateColumnButtonClick(event){
+
+    event.target.classList.add("hidden");
+
+    let columnNameInput = createInputElement("text", "column-name", "Nome da coluna");
+    columnNameInput.required = true;
+    columnNameInput.minLength = 3;
+
+
+    let saveButton = createElement("button", "save-column-button", "Criar coluna");
+    let closeButton = createElement("button", "close-craete-column-container", "X")
+
+    let actionButtonsContainer = createElement("div", "action-buttons-container");
+    actionButtonsContainer.append(
+        saveButton,
+        closeButton
+    );
+
+    let formContainer = createElement("form", "create-column-container");
+    formContainer.onsubmit = handleCreateColumn;
+
+    formContainer.append(
+        columnNameInput,
+        actionButtonsContainer,
+    );
+
+    let kanbanBoard = document.querySelector(".kanban-board");
+    kanbanBoard.appendChild(formContainer);
+}
+
+function handleCreateColumn(event){
+    event.preventDefault();
+    let newColumnName = event.srcElement.firstChild.value;
+    let savedColumns = JSON.parse(localStorage.getItem("kanban-columns"));
+    savedColumns.push(newColumnName);
+    localStorage.setItem("kanban-columns", JSON.stringify(savedColumns));
+    renderKanban(getTasks());
+}
+
+export function initializeKanbanColunsInLocalStoage(){
+    if(localStorage.getItem("kanban-columns") === null){
+        localStorage.setItem("kanban-columns", JSON.stringify(["todo", "progress", "completed"]));
+    }
+}
