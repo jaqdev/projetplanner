@@ -4,7 +4,7 @@ import { findTaskById, getTasks, saveTasksToStorage, updateTask } from './states
 import { createInputElement, renderCreateTaskModal } from './task-modal-setup.js';
 import {createElement, formatTasksToKanban} from './utils.js'
 
-const titles =  {"todo": "A fazer", "progress": "Em progresso", "completed": "Concluído"};
+const titlesTranslations =  {"todo": "A fazer", "progress": "Em progresso", "completed": "Concluído"};
 
 /**
  * Renderiza um quadro Kanban com base nas tarefas fornecidas.
@@ -21,16 +21,6 @@ export function renderKanban(tasks = []) {
 
     // Formata as tarefas para o layout Kanban
     tasks = formatTasksToKanban(tasks);
-
-    // Busca as colunas salvas
-    let columns = JSON.parse(localStorage.getItem("kanban-columns"));
-
-    // Adiciona um array vazio a coluna caso nao tenha nenhuma tarefa
-    columns.forEach(column => {
-        if(!tasks[column]){
-            tasks[column] = [];
-        }
-    });
 
     // Seleciona o container principal onde o Kanban será renderizado
     const mainContainer = document.querySelector('.view-content');
@@ -52,7 +42,7 @@ export function renderKanban(tasks = []) {
         const titleContainer = createElement('div', 'kanban-column-title-container');
 
         // Cria os títulos das colunas
-        const title = createElement('span', 'kanban-column-title', titles[status] ?? status + ": " + tasks[status].length);
+        const title = createElement('span', 'kanban-column-title', titlesTranslations[status] ? titlesTranslations[status] + ": " + tasks[status].length : status + ": " + tasks[status].length );
 
         // Adiciona os títulos aos containers
         titleContainer.appendChild(title);
@@ -63,8 +53,21 @@ export function renderKanban(tasks = []) {
             renderCreateTaskModal();
         });
 
+        // Cria os botões para apagar as colunas
+        const deleteColumnbutton = createElement('button', 'delete-column-button');
+        const deletColumnImage = createElement("img", "delete-column-image");
+        deletColumnImage.src = "./assets/icons/bin.svg";
+        deleteColumnbutton.appendChild(deletColumnImage);
+        deleteColumnbutton.addEventListener('click', () => {
+            deleteColumn(column);
+        });
+
         // Adiciona os botões de criar tarefas aos containers de título
         titleContainer.appendChild(addTaskButton);
+
+        if(titlesTranslations[status] === undefined){
+            titleContainer.appendChild(deleteColumnbutton);
+        }
 
         // Adiciona os containers de título às colunas
         column.appendChild(titleContainer);
@@ -111,7 +114,6 @@ export function renderKanban(tasks = []) {
         event.preventDefault();
         const taskId = event.dataTransfer.getData('text/plain');
         let task = findTaskById(taskId);
-        console.log(task);
         
         task.status = status;
         changeTaskStatus(taskId, status);
@@ -144,6 +146,19 @@ export function renderKanban(tasks = []) {
             let taskCount = taskList.childElementCount - 1;
             taskList.firstChild.firstChild.textContent = taskList.firstChild.firstChild.textContent.split(":")[0] + ": " + taskCount;
         });
+    }
+
+    function deleteColumn(column){
+        if(column.childElementCount > 1){
+            alert("Mova as tarefas existentes antes de apagar a coluna.");
+            return;
+        }
+
+        let kanbanColumns = JSON.parse(localStorage.getItem("kanban-columns"));
+        let columnName = Object.keys(titlesTranslations).find(key => titlesTranslations[key] === column.firstChild.firstChild.innerText.split(":")[0]) ?? column.firstChild.firstChild.innerText.split(":")[0];
+        
+        localStorage.setItem("kanban-columns", JSON.stringify(kanbanColumns.filter(kc => kc.title !== columnName)));
+        column.remove();
     }
 }
 
@@ -186,13 +201,14 @@ function handleCreateColumn(event){
     event.preventDefault();
     let newColumnName = event.srcElement.firstChild.value;
     let savedColumns = JSON.parse(localStorage.getItem("kanban-columns"));
-    savedColumns.push(newColumnName);
+    let currentColumnCount = document.querySelectorAll(".kanban-column").length;
+    savedColumns.push({title: newColumnName, position: currentColumnCount});
     localStorage.setItem("kanban-columns", JSON.stringify(savedColumns));
     renderKanban(getTasks());
 }
 
 export function initializeKanbanColunsInLocalStoage(){
     if(localStorage.getItem("kanban-columns") === null){
-        localStorage.setItem("kanban-columns", JSON.stringify(["todo", "progress", "completed"]));
+        localStorage.setItem("kanban-columns", JSON.stringify([{title:"todo", position: 0}, {title:"progress", position: 1}, {title: "completed", position: 2}]));
     }
 }

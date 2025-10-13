@@ -702,6 +702,7 @@ main {
 
 
 .kanban-column {
+  position: relative;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -735,7 +736,32 @@ main {
   border: none;
   cursor: pointer;
   font-size: 2em;
-  color: var(--font-color)
+  color: var(--font-color);
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all .5s ease;
+  }
+}
+
+.kanban-column .delete-column-button {
+  background-color: transparent;
+  border:none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  right: 17%;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all .5s ease;
+  }
+}
+
+
+.kanban-column .delete-column-button > img {
+  width: 20px;
+  height: 20px;
 }
 
 .kanban-card {

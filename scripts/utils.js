@@ -50,16 +50,21 @@ export function formatTasksToCalendar(tasks = []) {
 export function formatTasksToKanban(tasks = []) {
     if (tasks.length === 0) return {};
 
-    return tasks.reduce((acc, task) => {
-        let { id, date, title, time, priority, description, status, entireDay} = task;
+    let columns = JSON.parse(localStorage.getItem("kanban-columns"));
+    
+    columns.forEach(c => c.tasks = []);
 
-        const formattedTask = { id, title, description, date, time, priority, status, entireDay };
+    tasks.forEach(task => {
+        columns.find(c => c.title === task.status).tasks.push(task);
+    });
+    
+    columns.sort((c1, c2) => c1.position - c2.position);
 
-        if (!acc[status]) {
-            acc[status] = [formattedTask];
-            return acc;
-        }
-        acc[status].push(formattedTask);
-        return acc;
-    }, {});
+    let result = {};
+
+    columns.forEach( c => {
+        result[c.title] = c.tasks;
+    });
+
+    return result;
 }
