@@ -48,16 +48,14 @@ export function formatTasksToCalendar(tasks = []) {
 }
 
 export function formatTasksToKanban(tasks = []) {
-    if (tasks.length === 0) return {};
-
     let columns = JSON.parse(localStorage.getItem("kanban-columns"));
-    
+
     columns.forEach(c => c.tasks = []);
 
     tasks.forEach(task => {
         columns.find(c => c.title === task.status).tasks.push(task);
     });
-    
+
     columns.sort((c1, c2) => c1.position - c2.position);
 
     let result = {};
