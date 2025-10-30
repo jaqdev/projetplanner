@@ -9,19 +9,21 @@
 </head>
 
 <body>
-        <div class="login-container">
-        <h2>Entrar</h2>
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="./assets/icons/logo.png" alt="Logo do site">
+            <span class="title">Labubu planner</span>
+            <span class="slogan">Organize suas tarefas e conquiste seus objetivos</span>
+        </div>
         <form action="#" method="POST">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+            <h2>Entrar</h2>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <div class="password-container">
+                <input type="password" id="senha" name="senha" minlength="4" placeholder="Senha" required />
+                <img id="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
             </div>
-            <div class="input-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" minlength="4" required>
-                    <img id="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
-                </input>
-            </div>
+            
+            <button type="submit" class="login-btn">Entrar</button>
 
             <div class="form-options">
                 <div class="remember-me-container">
@@ -32,12 +34,25 @@
                 <a id="forgot-password" href="./esqueci-a-senha.html">Esqueci a senha</a>
             </div>
 
+            <span class="or-text">Ou entrar com</span>
 
-            <button type="submit" class="login-btn">Entrar</button>
-        </form>
-    </div>
+            <div class="social-login">
+                <div class="social-logo">
+                    <img src="./assets/icons/google.svg" alt="Google logo" width="25" height="25">
+                </div>
+                <span class="social-text">Continuar com Google</span>
+            </div>
+            <div class="social-login">
+                <div class="social-logo">
+                    <img src="./assets/icons/facebook.svg" alt="Facebook logo" width="25" height="25">
+                </div>
+                <span class="social-text">Continuar com Facebook</span>
+            </div>
 
-    <script type="module" src="./scripts/login/main.js"></script>
-    
+    </form>
+</div>
+
+<script type="module" src="./scripts/login/main.js"></script>
+
 </body>
 </html>

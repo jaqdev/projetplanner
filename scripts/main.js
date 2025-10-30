@@ -8,6 +8,12 @@ import { getCurrentView, loadCurrentViewFromLocalStorage } from './states/view-s
 import { setupCreateTaskButton } from './task-modal-setup.js';
 import { loadSavedTheme, setupTheme} from './theme.js'
 
+let logged = document.cookie.split(';').some(cookie => cookie.trim().startsWith('logged=true'));
+
+if (!logged) {
+    //window.location.href = 'login.html';
+}
+
 initializeKanbanColunsInLocalStoage();
 loadSavedTheme();
 initializeTasksLocalStorage();

@@ -1,82 +1,125 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--highlight);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color: var(--primary-color);
 }
 
 .login-container {
+    width: 50%;
+    display:flex;
+    gap: 50px;
     background-color: #fff;
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    border: 1px solid var(--border-color);
+}
+
+.login-container .logo-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container .logo-container > img {
+    border-bottom: 20px;
+    width: 250px;
+    height: 250px;
+}
+
+.login-container .logo-container .title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.login-container .logo-container .slogan {
+    margin-top: 10px;
+    max-width: 250px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    position: relative;
 }
 
 h2 {
     text-align: center;
-    color: #333;
     margin-bottom: 25px;
-}
-
-.input-group {
-    margin-bottom: 15px;
-    position: relative;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
     font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
 }
 
-.input-group input {
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+ input {
     width: 100%;
     padding: 10px;
-    border: 2px solid #8d8c8c;
+    border: 2px solid color-mix(in srgb, var(--primary-color), white 60%);
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
     outline: none;
+    margin-bottom: 10px;
+    color: inherit;
+    font-weight: 600;
 
     &:focus {
-         border: 2px solid #5f5d5d;
+         border: 2px solid color-mix(in srgb, var(--primary-color), white 30%);
          transition: all .3s ease;
     }
-   
+    
+    &::placeholder {
+        color: color-mix(in srgb, var(--primary-color), white 40%);
+    }
 }
 
-.input-group #visibility-icon {
+#visibility-icon {
     position: absolute;
-    top: 50%;
+    top: 40%;
+    transform: translateY(-50%);
     right: 10px;
-    right: 10px;
-    cursor: pointer;
 }
 
 .form-options {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #333;
-    margin-bottom: 15px;
+    margin: 15px 0 15px 0;
 }
 
-.form-options.remember-me-container {
+.form-options .remember-me-container {
     display: flex;
     width: fit-content;
     align-items: center;
     justify-content: start;
     gap: 5px;
+    
+    label {
+        cursor: pointer;
+    }
+
 }
 
 .form-options .remember-me-container input {
     width: 15px;
     height: 15px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
 }
 
 .form-options #forgot-password {
@@ -91,9 +134,9 @@ h2 {
 }
 
 .login-btn {
-    width: 100%;
+    width: 60%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -101,8 +144,54 @@ h2 {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    align-self: center;
 }
 
 .login-btn:hover {
-    background-color: #0056b3;
+    background-color: color-mix(in srgb, var(--primary-color), black 10%);
+}
+
+.or-text {
+    text-align: center;
+    margin: 15px 0 15px 0;
+    color: color-mix(in srgb, var(--primary-color), white 40%);
+    position: relative;
+
+    &::before, &::after {
+        content: "";
+        display: inline-block;
+        width: 35%;
+        height: 1px;
+        background-color: color-mix(in srgb, var(--primary-color), white 40%);
+        position: absolute;
+        top: 50%;
+    }
+
+    &::after {
+        right: 0;
+    }
+
+     &::before {
+        left: 0;
+    }
+}
+
+.social-login { 
+    width: 60%;
+    height: 40px;
+    cursor: pointer;
+    margin: 10px 0 10px 0;
+    align-self: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid color-mix(in srgb, var(--border-color), white 70%);
+
+    &:hover {
+        opacity: 0.8;
+        transition: all .3s ease;
+    }
+
 }

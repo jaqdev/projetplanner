@@ -6,6 +6,7 @@ export function loadSavedTheme(){
 
   if(!savedThemeKey) {
     changeTheme(themes["light"]);
+    localStorage.setItem("themeKey", "light");
     return;
   }
 
