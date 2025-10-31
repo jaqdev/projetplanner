@@ -88,7 +88,7 @@ h2 {
     }
 }
 
-#visibility-icon {
+.visibility-icon {
     position: absolute;
     top: 40%;
     transform: translateY(-50%);
@@ -194,6 +194,35 @@ h2 {
         transition: all .3s ease;
     }
 
+}
+
+.signup-text {
+    width: 100%;
+    text-align: end;
+    margin-top: 10px;
+
+    a {
+        padding: 5px 10px;;
+        border-radius: 5px;
+        background-color: color-mix(in srgb, var(--primary-color), white 50%);
+        color: inherit;   
+        text-decoration: none; 
+
+        &:hover {
+            transition: all .3s ease;
+            opacity: 0.9;
+        }
+    }
+
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0 10px 0;
+    text-align: left;
+    font-weight: 600;
+    display: block;
 }
 
 @media screen and (max-width: 1024px) {

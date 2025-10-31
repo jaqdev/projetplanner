@@ -1,19 +1,26 @@
 export function setupPasswordInputIconChange() {
-  const passwordInput = document.getElementById("senha");
-  const passwordIcon = document.getElementById("visibility-icon");
+  const passwordInputs = document.querySelectorAll("input[type='password']");
+  const passwordIcons = document.querySelectorAll(".visibility-icon");
 
-  if (!passwordInput || !passwordIcon) {
+  console.log(passwordInputs, passwordIcons);
+  
+
+  if (!passwordInputs || !passwordIcons) {
     console.error("Password input or icon not found in the DOM.");
     return;
   }
 
-  passwordIcon.addEventListener("click", () => {
-    const isPassword = passwordInput.type === "password";
+  passwordIcons.forEach(icon => icon.addEventListener("click", () => {
+    let container = icon.parentElement;
 
-    passwordInput.type = isPassword ? "text" : "password";
+    let input = container.querySelector("input");
 
-    passwordIcon.src = isPassword
+    const isPassword = input.type === "password";
+
+    input.type = isPassword ? "text" : "password";
+
+    icon.src = isPassword
       ? "./assets/icons/eye-invisible.svg"
       : "./assets/icons/eye-visible.svg";
-  });
+  }));
 }

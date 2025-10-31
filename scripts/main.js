@@ -8,11 +8,14 @@ import { getCurrentView, loadCurrentViewFromLocalStorage } from './states/view-s
 import { setupCreateTaskButton } from './task-modal-setup.js';
 import { loadSavedTheme, setupTheme} from './theme.js'
 
-let logged = document.cookie.split(';').some(cookie => cookie.trim().startsWith('logged=true'));
+let logged = document.cookie.split(';').find(cookie => cookie.trim().startsWith('loggedInUser='));
 
 if (!logged) {
-    //window.location.href = 'login.html';
+    window.location.href = 'login.html';
 }
+
+console.log('User is logged in as: ', logged.split('=')[1]);
+
 
 initializeKanbanColunsInLocalStoage();
 loadSavedTheme();

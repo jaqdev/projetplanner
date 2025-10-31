@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Acesse sua conta - Planner </title>
+    <title> Crie sua conta - Planner </title>
      <link rel="stylesheet" href="./styles/auth.css">
 
 </head>
@@ -16,16 +16,21 @@
             <span class="slogan">Organize suas tarefas e conquiste seus objetivos</span>
         </div>
         <form action="#" method="POST">
-            <h2>Entrar</h2>
+            <h2>Cadastro</h2>
+            <input type="text" id="name" name="name" placeholder="Nome" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="password-container">
                 <input type="password" id="senha" name="senha" minlength="4" placeholder="Senha" required />
                 <img class="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
             </div>
-            
-            <span class="error-message"></span>
+              <div class="password-container">
+                <input type="password" id="confirmacao-senha" name="confirmacao-senha" minlength="4" placeholder="Confirme sua senha" required />
+                <img class="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
+            </div>
 
-            <button type="submit" class="login-btn">Entrar</button>
+            <span class="error-message"></span>
+            
+            <button type="submit" class="login-btn">Cadastrar</button>
 
             <div class="form-options">
                 <div class="remember-me-container">
@@ -56,7 +61,7 @@
     </form>
 </div>
 
-<script type="module" src="./scripts/login/main.js"></script>
+<script type="module" src="./scripts/cadastro/main.js"></script>
 
 </body>
 </html>
