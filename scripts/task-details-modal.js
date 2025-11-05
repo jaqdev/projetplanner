@@ -8,10 +8,9 @@ import { renderTaskListModal } from "./task-list-modal.js";
 import { createInputElement, createLabel, createTextAreaElement } from "./task-modal-setup.js";
 import { createElement, formatTasksToCalendar } from "./utils.js";
 
-export function renderTaskDetailsModal(task) {
+const priorities = ["BAIXA", "MEDIA", "ALTA"];
 
-    console.log(task.date);
-    
+export function renderTaskDetailsModal(task) {  
 
     const body = document.querySelector('body');
 
@@ -40,7 +39,7 @@ export function renderTaskDetailsModal(task) {
     const taskTitleInput = createInputElement("text", "title", "Ex: Fazer a lista de Cálculo");
     taskTitleInput.id = "task-title-input"; // Associa o input ao label
     taskTitleInput.required = true;
-    taskTitleInput.value = task.title || "";
+    taskTitleInput.value = task.titulo || "";
     taskTitleInput.disabled = true;
 
     // --- Campo: Data ---
@@ -50,7 +49,7 @@ export function renderTaskDetailsModal(task) {
     const taskTimeInput = createInputElement("time", "time");
     taskDateInput.id = "task-date-input";
     taskTimeInput.id = "task-time-input";
-    taskDateInput.value = task.date || "";
+    taskDateInput.value = task.data_limite.split("T")[0];
     taskTimeInput.value = task.time || "";
     taskDateInput.required = true;
     taskTimeInput.required = !task.entireDay;
@@ -77,30 +76,23 @@ export function renderTaskDetailsModal(task) {
     const taskDescriptionLabel = createLabel("Descrição", "task-description-input");
     const taskDescriptionInput = createTextAreaElement("description", "Detalhes da tarefa...");
     taskDescriptionInput.id = "task-description-input";
-    taskDescriptionInput.value = task.description || "";
+    taskDescriptionInput.value = task.descricao || "";
     taskDescriptionInput.disabled = true;
 
     // --- Campo: Prioridade (Radio Buttons) ---
     const priorityLabel = createLabel("Prioridade"); // Label geral para o grupo
     const priorityContainer = createElement("div", "priority-container");
 
-    // Opções de prioridade
-    const priorities = [
-        { value: "low", label: "Baixa" },
-        { value: "medium", label: "Média" },
-        { value: "high", label: "Alta" }
-    ];
-
     priorities.forEach(priority => {
         const radioWrapper = createElement("div", "radio-wrapper");
 
         const radioInput = createInputElement("radio", "priority", "");
-        radioInput.value = priority.value;
+        radioInput.value = priority;
         radioInput.disabled = true;
-        radioInput.id = `priority-${priority.value}`;
-        radioInput.checked = priority.value === task.priority;
+        radioInput.id = `priority-${priority}`;
+        radioInput.checked = priority === task.prioridade;
 
-        const radioLabel = createLabel(priority.label, `priority-${priority.value}`);
+        const radioLabel = createLabel(priority, `priority-${priority}`);
         
         radioWrapper.append(radioInput, radioLabel);
         priorityContainer.append(radioWrapper);

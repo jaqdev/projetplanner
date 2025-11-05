@@ -1,6 +1,8 @@
 // Imports
+import { apiFetch } from './api.js';
 import { hideDateControls } from './calendar.js';
 import { createTaskCard } from './create-card.js';
+import { getAccessToken } from './states/access-token.js';
 import { findTaskById, getTasks, saveTasksToStorage, updateTask } from './states/task-state.js';
 import { createInputElement, renderCreateTaskModal } from './task-modal-setup.js';
 import { createElement, formatTasksToKanban } from './utils.js';
@@ -14,6 +16,7 @@ const titlesTranslations = {
 
 // MAIN ENTRY
 export function renderKanban(tasks = []) {
+
   hideDateControls();
   tasks = formatTasksToKanban(tasks);
 
@@ -22,9 +25,10 @@ export function renderKanban(tasks = []) {
 
   const kanbanBoard = createElement('div', 'kanban-board');
 
-  Object.keys(tasks).forEach(status => {
-    const column = createKanbanColumn(status, tasks[status]);
-    kanbanBoard.appendChild(column);
+
+  Object.values(tasks).forEach(column => {
+    const columnElement = createKanbanColumn(column);
+    kanbanBoard.appendChild(columnElement);
   });
 
   const createColumnButton = createElement('button', 'create-column-button', 'Criar coluna');
@@ -35,19 +39,20 @@ export function renderKanban(tasks = []) {
 }
 
 // COLUMN CREATION
-function createKanbanColumn(status, taskList) {
+function createKanbanColumn(columnData) {
   const column = createElement('ul', 'kanban-column', '');
   column.classList.add('task-list');
+  column.setAttribute("column-id", columnData.id);
 
-  const titleContainer = createColumnHeader(status, taskList.length);
+  const titleContainer = createColumnHeader(columnData.title, columnData.tasks.length);
   column.appendChild(titleContainer);
 
   // Drag/drop events
   column.addEventListener('dragover', handleDragOver);
-  column.addEventListener('drop', e => handleDrop(e, status, column));
+  column.addEventListener('drop', e => handleDrop(e, columnData.id, column));
 
   // Add tasks
-  taskList.forEach(task => {
+  columnData.tasks.forEach(task => {
     const taskCard = setupTaskCard(createTaskCard(task, task.date, true), task.id);
     column.appendChild(taskCard);
   });
@@ -100,20 +105,33 @@ function handleDragOver(e) {
   e.dataTransfer.dropEffect = 'move';
 }
 
-function handleDrop(e, newStatus, column) {
+async function handleDrop(e, columnId, column) {
   e.preventDefault();
 
   const taskId = e.dataTransfer.getData('text/plain');
-  const task = findTaskById(taskId);
 
-  task.status = newStatus;
-  updateTask(taskId, task);
-  saveTasksToStorage();
+  const task = findTaskById(Number(taskId));
 
-  document.getElementById(taskId)?.remove();
+  let res = await apiFetch("/tasks/" + taskId + "/move", {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer " + getAccessToken() 
+    },
+    body: JSON.stringify({
+      id_coluna: columnId
+    })
+  });
 
-  const taskCard = setupTaskCard(createTaskCard(task, task.date, true), task.id);
-  column.appendChild(taskCard);
+  if(res.status === 200){
+    updateTask(taskId, res.tarefa);
+    saveTasksToStorage();
+
+    document.getElementById(taskId)?.remove();
+
+    const taskCard = setupTaskCard(createTaskCard(task, task.date, true), task.id);
+    column.appendChild(taskCard);
+  }
 
   updateColumnTitles();
   e.dataTransfer.clearData();
@@ -187,14 +205,3 @@ function handleCreateColumn(e) {
   renderKanban(getTasks());
 }
 
-// INITIALIZER
-export function initializeKanbanColunsInLocalStoage() {
-  if (!localStorage.getItem('kanban-columns')) {
-    const defaults = [
-      { title: 'todo', position: 0 },
-      { title: 'progress', position: 1 },
-      { title: 'completed', position: 2 }
-    ];
-    localStorage.setItem('kanban-columns', JSON.stringify(defaults));
-  }
-}

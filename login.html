@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="module" >
+        import { loadSavedTheme } from './scripts/theme.js';
+        loadSavedTheme();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Acesse sua conta - Planner </title>
-     <link rel="stylesheet" href="./styles/auth.css">
+    <link rel="stylesheet" href="./styles/auth.css">
 
 </head>
 
@@ -15,7 +19,7 @@
             <span class="title">planner</span>
             <span class="slogan">Organize suas tarefas e conquiste seus objetivos</span>
         </div>
-        <form action="#" method="POST">
+        <form>
             <h2>Entrar</h2>
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="password-container">

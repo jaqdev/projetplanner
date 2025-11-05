@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="module" >
+        import { loadSavedTheme } from './scripts/theme.js';
+        loadSavedTheme();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Crie sua conta - Planner </title>
-     <link rel="stylesheet" href="./styles/auth.css">
+    <link rel="stylesheet" href="./styles/auth.css">
 
 </head>
 
@@ -21,10 +25,6 @@
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div class="password-container">
                 <input type="password" id="senha" name="senha" minlength="4" placeholder="Senha" required />
-                <img class="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
-            </div>
-              <div class="password-container">
-                <input type="password" id="confirmacao-senha" name="confirmacao-senha" minlength="4" placeholder="Confirme sua senha" required />
                 <img class="visibility-icon" src="./assets/icons/eye-visible.svg" width="25" height="25" alt="Eye slash" >
             </div>
 
@@ -56,7 +56,7 @@
                 <span class="social-text">Continuar com Facebook</span>
             </div>
 
-            <span class="signup-text">Não tem uma conta? <a href="./cadastro.html">Cadastre-se</a></span>
+            <span class="signup-text">Já tem uma conta? <a href="./cadastro.html">Login</a></span>
 
     </form>
 </div>

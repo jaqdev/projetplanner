@@ -1,21 +1,18 @@
-export function handleSignin(event) {
+import { apiFetch } from "../api.js";
+import { setAccessToken } from "../states/access-token.js"
+
+export async function handleSignin(event) {
     event.preventDefault();
+    event.stopPropagation();
     
     const formData = new FormData(event.target);
 
     const name = formData.get('name');
     const email = formData.get('email');
     const password = formData.get('senha');
-    const confirmPassword = formData.get('confirmacao-senha');
 
     const errorMessage = document.querySelector('.error-message');
 
-
-    // Verifica se as senhas coincidem
-    if (password !== confirmPassword) {
-        errorMessage.textContent = 'As senhas não coincidem.';
-        return;
-    }
 
     if(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\.])[A-Za-z\d@$!%*?&\.]{4,}$/).test(password) === false){
         errorMessage.textContent = 'A senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caractere especial.';
@@ -27,27 +24,19 @@ export function handleSignin(event) {
         return;
     }
 
-    // Aqui você pode adicionar a lógica para enviar os dados ao servidor
-    console.log('Nome:', name);
-    console.log('Email:', email);
-    console.log('Senha:', password);
+   console.log("Enviando dados para o servidor...");
+    let res = await apiFetch("/auth/signin", {
+        method: "POST",
+        body: JSON.stringify({nome: name, email, senha: password}),
+        errorMessage
+    });
 
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-
-    // Verifica se o email já está cadastrado
-    if (users.some(user => user.email === email)) {
-        errorMessage.textContent = 'Este email já está cadastrado.';
+    if(res.status === 201){
+        localStorage.setItem("logged_user", JSON.stringify({email}));
+        window.location.href = './index.html';
+        setAccessToken(res.token);
         return;
     }
 
-    errorMessage.textContent = '';
-
-    // Adiciona o novo usuário ao array
-    users.push({ name, email, password, id: Math.random().toString(36).substring(2) });
-
-    // Salva o array atualizado no localStorage
-    localStorage.setItem('users', JSON.stringify(users));
-
-    // Redireciona para a página de login ou outra página apropriada
-    window.location.href = 'login.html';
+    errorMessage.textContent = res.mensagem;
 }

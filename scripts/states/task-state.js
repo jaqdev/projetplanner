@@ -33,10 +33,3 @@ export function loadTasksFromStorage() {
   const stored = JSON.parse(localStorage.getItem('tasks')) || [];
   setTasks(stored);
 }
-
-// Simular api com tarefas vazias
-export function initializeTasksLocalStorage() {
-    if (localStorage.getItem('tasks') === null) {
-        localStorage.setItem('tasks', JSON.stringify([]));
-    }
-}

@@ -35,14 +35,11 @@ export function formatTasksToCalendar(tasks = []) {
     if (tasks.length === 0) return {};
 
     return tasks.reduce((acc, task) => {
-        let { id, date, title, time, priority, description, status, entireDay} = task;
-        const formattedTask = { id, title, description, date, time, priority, status, entireDay };
-
-        if (!acc[date]) {
-            acc[date] = [formattedTask];
+        if (!acc[task.data_limite.split("T")[0]]) {
+            acc[task.data_limite.split("T")[0]] = [task];
             return acc;
         }
-        acc[date].push(formattedTask);
+        acc[task.data_limite.split("T")[0]].push(task);
         return acc;
     }, {});
 }
@@ -50,19 +47,17 @@ export function formatTasksToCalendar(tasks = []) {
 export function formatTasksToKanban(tasks = []) {
     let columns = JSON.parse(localStorage.getItem("kanban-columns"));
 
+    console.log(tasks);
+    
+
+
     columns.forEach(c => c.tasks = []);
 
     tasks.forEach(task => {
-        columns.find(c => c.title === task.status).tasks.push(task);
+        columns.find(c => c.id === task.id_coluna).tasks.push(task);
     });
 
     columns.sort((c1, c2) => c1.position - c2.position);
 
-    let result = {};
-
-    columns.forEach( c => {
-        result[c.title] = c.tasks;
-    });
-
-    return result;
+    return columns;
 }

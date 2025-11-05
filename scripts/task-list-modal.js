@@ -46,7 +46,7 @@ export function renderTaskListModal(calendarFormatedTasks = {}, calendarDateForm
     } else {
         // Cria um item na lista para cada tarefa
         tasksForDate.forEach((task) => {
-            let taskCard = createTaskCard(task, calendarDateFormated);
+            let taskCard = createTaskCard(task, task.data_limite, calendarDateFormated);
             taskList.appendChild(taskCard);
         });
     }

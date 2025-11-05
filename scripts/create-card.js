@@ -1,22 +1,21 @@
 import { renderTaskDetailsModal } from "./task-details-modal.js";
 
-const priorities = {"low": "Baixa", "medium": "Média", "high": "Alta"};
 const statuses = {"todo": "A Fazer", "progress": "Em Progresso", "completed": "Concluída"};
 
 // Cria o card de cada tarefa
-export function createTaskCard(task, date, isForKanban = false){
+export function createTaskCard(task, isForKanban = false){   
         let taskItem = document.createElement('li');
         taskItem.classList.add('task-item');
 
         // Cria título da tarefa
         let title = document.createElement('span');
         title.classList.add('task-title');
-        title.textContent = task.title;
+        title.textContent = task.titulo;
 
         // Cria o prazo da tarefa
         let deadline = document.createElement('span');
         deadline.classList.add('task-deadline');
-        deadline.textContent = `Prazo: ${new Date(date.split('-').map(Number)).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
+        deadline.textContent = `Prazo: ${new Date(task.data_limite.split("T")[0].split('-')).toLocaleDateString()}`;
 
         // Cria o container de prioridade e status
         let priorityStatusContainer = document.createElement('div');
@@ -25,8 +24,8 @@ export function createTaskCard(task, date, isForKanban = false){
 
         // Cria a prioridade da tarefa
         let priority = document.createElement('span');
-        priority.classList.add('task-priority',  "priority-" + task.priority.toLowerCase());
-        priority.textContent = `Prioridade: ${priorities[task.priority.toLowerCase()]}`;
+        priority.classList.add('task-priority',  "priority-" + task.prioridade.toLowerCase());
+        priority.textContent = `Prioridade: ${task.prioridade}`;
 
         // Cria o container de status
         let statusContainer = document.createElement('div');
@@ -61,7 +60,5 @@ export function createTaskCard(task, date, isForKanban = false){
 }
 
 function handleCardClick(task){
-    console.log('Card clicked with ID:', task);
-
     renderTaskDetailsModal(task);
 }

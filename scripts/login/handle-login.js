@@ -1,4 +1,7 @@
-export function handleLogin(event){
+import {apiFetch} from '../api.js'
+import { setAccessToken , getAccessToken} from '../states/access-token.js'
+
+export async function handleLogin(event){
     event.preventDefault();
     
     const formData = new FormData(event.target);
@@ -13,16 +16,18 @@ export function handleLogin(event){
         return;
     }
 
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-
-    const user = users.find(user => user.email === email && user.password === password);
-
-    if(user){
-        errorMessage.textContent = '';
-        document.cookie = `loggedInUser=${user.id}; path=/`;
-        window.location.href = 'index.html';
-    } else {
-        errorMessage.textContent = 'Email ou senha incorretos.';
+    let res = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email, senha: password })
+    });
+    
+    if(res.status === 200){
+        localStorage.setItem("logged_user", JSON.stringify({email}));
+        setAccessToken(res.token);
+        window.location.href = "../index.html"
+        return;
     }
+
+    errorMessage.textContent = res.mensagem;
 
 }
